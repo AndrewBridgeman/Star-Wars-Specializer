@@ -9,13 +9,14 @@ name = "pypi"
 url = "https://pypi.org/simple"
 verify_ssl = true
 
-[dev-packages]
-pytest = "~= 4.3"
-
 [requires]
 python_version = "3.7"
 
+[dev-packages]
+pytest = "~= 4.3"
+cython = "~= 0.29.13"
+
 [packages]
+cython = "~= 0.29.13"
 kivy = "~=1.11"
 ffpyplayer = "~=4.2.0"
-ffmpeg-python = "*"

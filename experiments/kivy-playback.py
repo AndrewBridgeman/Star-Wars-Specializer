@@ -15,7 +15,7 @@ kivy.require("1.11.1")
 class MyVideoApp(App):
     def build(self):
         self.player = VideoPlayer(
-                source='files/1.mp4',
+                source='out.avi',
                 state='play',
                 options={'allow_stretch': True})
         return self.player

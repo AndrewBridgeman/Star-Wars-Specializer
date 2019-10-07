@@ -1,34 +1,31 @@
 #!/usr/bin/env pipenv run python
 
-import ffmpeg
+from simple_ffmpeg import Ffmpeg
+
+clip1 = 'files/1.mp4'
+clip2 = 'files/2.mp4'
+clip3 = 'files/3.mp4'
+clipA = 'files/A.mp4'
+clipB = 'files/B.mp4'
 
 def main(filename):
-    clip1 = ffmpeg.input('files/1.mp4')
-    clip2 = ffmpeg.input('files/2.mp4')
-    clip3 = ffmpeg.input('files/3.mp4')
+    movie = Ffmpeg('out.avi')
+    movie.append(clip1)
 
-    clipA = ffmpeg.input('files/A.mp4')
-    clipB = ffmpeg.input('files/B.mp4')
-
-    new_clip = clip1
-    count = 0
     file = open(filename)
     line = file.read()
 
-    while count < 2:
+    for count in range(2):
         if "A" in line and count == 0:
-            new_clip = ffmpeg.concat(new_clip, clipA)
+            movie.append(clipA)
         if "B" in line and count == 1:
-            new_clip = ffmpeg.concat(new_clip, clipB)
+            movie.append(clipB)
         if count == 0:
-            new_clip = ffmpeg.concat(new_clip, clip2)
+            movie.append(clip2)
         if count == 1:
-            new_clip = ffmpeg.concat(new_clip, clip3)
-        count = count + 1
+            movie.append(clip3)
 
-
-    new_clip = new_clip.output("asdf.mp4")
-    ffmpeg.run(new_clip)
+    movie.write()
 
 if __name__ == '__main__':
     main('ffmpeg-assembly-input.txt')
