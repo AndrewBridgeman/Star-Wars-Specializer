@@ -1,0 +1,16 @@
+# This file configures your Python environment by specifying the versions
+# of libraries that we depend on, as well as the version of Python itself.
+# Versions specified in this file may be ambigous, but the exact versions
+# used the first time you run your program are cached in Pipfile.lock. You
+# should never edit Pipfile.lock directly.
+
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+pytest = "~= 4.3"
+
+[requires]
+python_version = "3.7"

@@ -1,0 +1,15 @@
+# Virtual environment
+.venv/*
+!.venv/.keep
+
+# Compiled Python code
+__pycache__/
+
+# Mypy data
+.mypy_cache/
+
+# Pytest data
+.pytest_cache/
+
+# CLion configuration
+.idea/
