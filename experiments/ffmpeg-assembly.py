@@ -7,8 +7,19 @@ clip2 = 'files/2.mp4'
 clip3 = 'files/3.mp4'
 clipA = 'files/A.mp4'
 clipB = 'files/B.mp4'
+clipC = 'files/C.mp4'
 
-def main(filename):
+def everything():
+    movie = Ffmpeg('out.avi')
+    movie.append(clip1)
+    movie.append(clipA)
+    movie.append(clip2)
+    movie.append(clipB)
+    movie.append(clip3)
+    movie.append(clipC)
+    movie.write()
+
+def select(filename):
     movie = Ffmpeg('out.avi')
     movie.append(clip1)
 
@@ -28,4 +39,5 @@ def main(filename):
     movie.write()
 
 if __name__ == '__main__':
-    main('ffmpeg-assembly-input.txt')
+    # everything()
+    select('ffmpeg-assembly-input.txt')
