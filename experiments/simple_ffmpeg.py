@@ -24,10 +24,14 @@ class Ffmpeg:
             sys.stderr.write('\n')
             sys.exit(2)
 
+    def _concat(self):
+        count = len(self._inputs) - 1
+        return ','.join(count * ['concat'])
+
     def _build_command(self):
         command = ['ffmpeg', '-y']
         for input in self._inputs:
-            command.append('-i')
-            command.append(input)
+            command.extend(['-i', input])
+        command.extend(['-filter_complex', self._concat()])
         command.append(self._output)
         return command
