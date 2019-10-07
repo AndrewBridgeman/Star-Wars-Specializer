@@ -11,7 +11,7 @@ grab () {
 
     url=$1
 
-    wget -O"$dst" "$url"
+    curl "$url" --output "$dst"
 }
 
 master_url=https://github.com/AndrewBridgeman/Custom-Movie-Maker/blob/master
