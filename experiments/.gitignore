@@ -1,0 +1,8 @@
+# Big files
+files/*
+!files/.keep
+*.avi
+*.jpeg
+*.mp4
+*.png
+*.wav
