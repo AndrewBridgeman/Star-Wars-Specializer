@@ -13,3 +13,10 @@ __pycache__/
 
 # CLion configuration
 .idea/
+
+# Big files
+*.avi
+*.jpeg
+*.mp4
+*.png
+*.wav
