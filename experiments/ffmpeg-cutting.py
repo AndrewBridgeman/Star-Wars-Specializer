@@ -1,0 +1,8 @@
+test1 = 'files/test1.mp4'
+test2 = 'files/test2.mp4'
+
+from simple_ffmpeg_cutting import Ffmpeg_cutting
+
+movie = Ffmpeg_cutting('out.mp4')
+movie.append(test1)
+movie.write()

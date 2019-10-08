@@ -8,6 +8,8 @@ clip3 = 'files/3.mp4'
 clipA = 'files/A.mp4'
 clipB = 'files/B.mp4'
 clipC = 'files/C.mp4'
+test1 = 'files/test1.mp4'
+test2 = 'files/test2.mp4'
 
 def everything():
     movie = Ffmpeg('out.avi')
@@ -20,7 +22,7 @@ def everything():
     movie.write()
 
 def select(filename):
-    movie = Ffmpeg('out.avi')
+    movie = Ffmpeg('out.mp4')
     movie.append(clip1)
 
     file = open(filename)

@@ -1,7 +1,7 @@
 import subprocess
 import sys
 
-class Ffmpeg:
+class Ffmpeg_cutting:
     """Calls ffmpeg to append video files."""
 
     def __init__(self, output):
@@ -30,10 +30,13 @@ class Ffmpeg:
 
     def _build_command(self):
         command = ['ffmpeg', '-y']
-        for input in self._inputs:
-            command.extend(['-i', input])
-        command.extend(['-filter_complex', self._concat()])
+        command.append('-ss')
+        command.append('00:00:01')
+        command.extend(['-i', self._inputs[0]])
+        command.append('-to')
+        command.append('00:00:10')
+        command.append('-c')
+        command.append('copy')
         command.append(self._output)
         print(command)
         return command
-
