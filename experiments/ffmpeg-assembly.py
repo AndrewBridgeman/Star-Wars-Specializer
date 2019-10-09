@@ -11,8 +11,10 @@ clipC = 'files/C.mp4'
 test1 = 'files/test1.mp4'
 test2 = 'files/test2.mp4'
 
+video_list = []
+
 def everything():
-    movie = Ffmpeg('out.avi')
+    movie = Ffmpeg('final.mp4')
     movie.append(clip1)
     movie.append(clipA)
     movie.append(clip2)
@@ -22,21 +24,19 @@ def everything():
     movie.write()
 
 def select(filename):
-    movie = Ffmpeg('out.mp4')
-    movie.append(clip1)
+    movie = Ffmpeg('final.mp4')
 
     file = open(filename)
-    line = file.read()
+    lines = file.readlines()
+    for count in range(len(lines)+1):
+        video_list.append('out' + str(count+1) + '.mp4')
 
-    for count in range(2):
-        if "A" in line and count == 0:
-            movie.append(clipA)
-        if "B" in line and count == 1:
-            movie.append(clipB)
-        if count == 0:
-            movie.append(clip2)
-        if count == 1:
-            movie.append(clip3)
+    for i in range(len(lines)):
+        movie.append(video_list[i])
+        if lines[i].strip() != 'no':
+            movie.append('files/' + lines[i].strip() + '.mp4')
+
+    movie.append(video_list[len(video_list)-1])
 
     movie.write()
 
