@@ -3,14 +3,27 @@ test2 = 'files/test2.mp4'
 
 from simple_ffmpeg_cutting import Ffmpeg_cutting
 
-timestamp = '00:00:15'
+def cut(filename):
 
-movie = Ffmpeg_cutting('out.mp4')
-movie.append(test1)
-movie.add_times('00:00:00', timestamp)
-movie.write()
+    file = open(filename)
+    lines = file.readlines()
+    count = 1
 
-movie = Ffmpeg_cutting('out2.mp4')
-movie.append(test1)
-movie.add_times(timestamp, '0')
-movie.write()
+    movie = Ffmpeg_cutting('out1.mp4')
+    movie.append(test1)
+    movie.add_times('00:00:00', lines[0].strip())
+    movie.write()
+
+    for i in range(len(lines)):
+        count = count + 1
+        movie = Ffmpeg_cutting('out' + str(count) + '.mp4')
+        movie.append(test1)
+        if i==len(lines)-1:
+            movie.add_times(lines[i].strip(), '0')
+        else:
+            movie.add_times(lines[i].strip(), lines[i+1].strip())
+        movie.write()
+
+if __name__ == '__main__':
+    # everything()
+    cut('ffmpeg-cutting-input.txt')

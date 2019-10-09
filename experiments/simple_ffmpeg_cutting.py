@@ -32,14 +32,11 @@ class Ffmpeg_cutting:
 
     def _build_command(self):
         command = ['ffmpeg', '-y']
+        command.append('-t')
+        command.append(self._time2)
+        command.extend(['-i', self._inputs[0]])
         command.append('-ss')
         command.append(self._time1)
-        command.extend(['-i', self._inputs[0]])
-        if self._time2 != '0':
-            command.append('-to')
-            command.append(self._time2)
-        command.append('-c')
-        command.append('copy')
         command.append(self._output)
         print(command)
         return command
