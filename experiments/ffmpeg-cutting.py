@@ -7,12 +7,25 @@ def cut(filename):
 
     file = open(filename)
     lines = file.readlines()
-    count = 1
+    if 'start\n' in lines:
+        lines.remove('start\n')
+
+    if 'start' in lines:
+        lines.remove('start')
+
+    if 'end\n' in lines:
+        lines.remove('end\n')
+
+    if 'end' in lines:
+        lines.remove('end')
 
     movie = Ffmpeg_cutting('out1.mp4')
     movie.append(test1)
+
     movie.add_times('00:00:00', lines[0].strip())
     movie.write()
+
+    count = 1
 
     for i in range(len(lines)):
         count = count + 1

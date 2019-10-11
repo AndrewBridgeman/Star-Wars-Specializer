@@ -38,5 +38,4 @@ class Ffmpeg_cutting:
         command.append('-ss')
         command.append(self._time1)
         command.append(self._output)
-        print(command)
         return command

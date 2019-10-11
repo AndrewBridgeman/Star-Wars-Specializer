@@ -34,6 +34,5 @@ class Ffmpeg:
             command.extend(['-i', input])
         command.extend(['-filter_complex', self._concat()])
         command.append(self._output)
-        print(command)
         return command
 

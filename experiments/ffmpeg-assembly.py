@@ -13,21 +13,23 @@ test2 = 'files/test2.mp4'
 
 video_list = []
 
-def everything():
-    movie = Ffmpeg('final.mp4')
-    movie.append(clip1)
-    movie.append(clipA)
-    movie.append(clip2)
-    movie.append(clipB)
-    movie.append(clip3)
-    movie.append(clipC)
-    movie.write()
-
 def select(filename):
+    end = False
     movie = Ffmpeg('final.mp4')
 
     file = open(filename)
     lines = file.readlines()
+    if lines[0].strip().rsplit()[0] == '(start)':
+        if lines[0].strip().rsplit()[1] != 'no':
+            movie.append('files/' + lines[0].strip().rsplit()[1] + '.mp4')
+        lines.remove(lines[0])
+
+    if lines[len(lines)-1].strip().rsplit()[0] == '(end)':
+        if lines[len(lines)-1].strip().rsplit()[1] != 'no':
+            end = True
+            end_video = lines[len(lines)-1].strip().rsplit()[1]
+        lines.remove(lines[len(lines)-1])
+
     for count in range(len(lines)+1):
         video_list.append('out' + str(count+1) + '.mp4')
 
@@ -37,6 +39,9 @@ def select(filename):
             movie.append('files/' + lines[i].strip() + '.mp4')
 
     movie.append(video_list[len(video_list)-1])
+
+    if end == True:
+        movie.append('files/' + end_video + '.mp4')
 
     movie.write()
 
