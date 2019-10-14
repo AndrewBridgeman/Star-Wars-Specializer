@@ -4,7 +4,6 @@ test2 = 'files/test2.mp4'
 from simple_ffmpeg_cutting import Ffmpeg_cutting
 
 def cut(filename):
-
     file = open(filename)
     lines = file.readlines()
     if 'start\n' in lines:
@@ -19,23 +18,16 @@ def cut(filename):
     if 'end' in lines:
         lines.remove('end')
 
-    movie = Ffmpeg_cutting('out1.mp4')
-    movie.append(test1)
+    cutter = Ffmpeg_cutting(test1, 'out{}.mp4')
 
-    movie.add_times('00:00:00', lines[0].strip())
-    movie.write()
-
-    count = 1
+    cutter.add_span('00:00:00', lines[0].strip())
 
     for i in range(len(lines)):
-        count = count + 1
-        movie = Ffmpeg_cutting('out' + str(count) + '.mp4')
-        movie.append(test1)
-        if i==len(lines)-1:
-            movie.add_times(lines[i].strip(), '0')
+        if i == len(lines) - 1:
+            cutter.add_span(lines[i].strip(), '0')
         else:
-            movie.add_times(lines[i].strip(), lines[i+1].strip())
-        movie.write()
+            cutter.add_span(lines[i].strip(), lines[i+1].strip())
+    cutter.write()
 
 if __name__ == '__main__':
     # everything()
