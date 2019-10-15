@@ -4,6 +4,7 @@ test2 = 'files/test2.mp4'
 from simple_ffmpeg_cutting import Ffmpeg_cutting
 
 def cut(filename):
+    yaml.load("cutting-directions.txt")
     file = open(filename)
     lines = file.readlines()
     if 'start\n' in lines:

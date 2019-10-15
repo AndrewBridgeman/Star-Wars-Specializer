@@ -1,5 +1,6 @@
 import subprocess
 import sys
+import os
 
 class Ffmpeg:
     """Calls ffmpeg to append video files."""
@@ -15,7 +16,9 @@ class Ffmpeg:
         self._inputs.extend(inputs)
 
     def write(self):
-        command = self._build_command()
+        ##Change this line to try different methods
+        command = self._concat_demuxer()
+        ##
         completed = subprocess.run(command,
                 capture_output = True)
         if completed.returncode != 0:
@@ -25,8 +28,7 @@ class Ffmpeg:
             sys.exit(2)
 
     def _concat(self):
-        count = len(self._inputs) - 1
-        return ','.join(count * ['concat'])
+        return 'concat = n ={}'.format(len(self._inputs))
 
     def _build_command(self):
         command = ['ffmpeg', '-y']
@@ -36,3 +38,32 @@ class Ffmpeg:
         command.append(self._output)
         return command
 
+    def _concat_demuxer(self):
+        file = open("temp.txt", "w")
+        for i in range(len(self._inputs)):
+            file.write('file ' + "'" + self._inputs[i] + "'" + '\n')
+        command = ['ffmpeg']
+        command.extend(['-y', '-f', 'concat', '-safe', '0'])
+        command.extend(['-i', 'temp.txt','-c', 'copy'])
+        command.append(self._output)
+        return command
+
+    def _concat_protocol(self):
+        for i in range(len(self._inputs)):
+            command = ['ffmpeg', '-y']
+            command.extend(['-i', self._inputs[i]])
+            command.extend(['-c', 'copy', '-bsf:v', 'h264_mp4toannexb', '-f', 'mpegts'])
+            command.append('intermediate' + str(i+1) + '.ts')
+            subprocess.run(command, capture_output=True)
+
+        command = ['ffmpeg', '-y', '-i']
+        concat_list = 'concat:'
+        for i in range(len(self._inputs)):
+            if i == len(self._inputs)-1:
+                concat_list = concat_list + 'intermediate' + str(i + 1) + '.ts'
+            else:
+                concat_list = concat_list + 'intermediate' + str(i+1) + '.ts|'
+        command.append(concat_list)
+        command.extend(['-c', 'copy', '-bsf:a', 'aac_adtstoasc'])
+        command.append(self._output)
+        return command

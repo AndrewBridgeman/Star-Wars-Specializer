@@ -45,6 +45,7 @@ def select(filename):
 
     movie.write()
 
+
 if __name__ == '__main__':
     # everything()
     select('ffmpeg-assembly-input.txt')
