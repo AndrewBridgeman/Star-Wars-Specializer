@@ -1,0 +1,24 @@
+file-path: files/test1.mp4
+output-name: out
+
+scene-paths:
+  scene1: files/B.mp4
+  scene2: files/C.mp4
+  scene3: files/1.mp4
+  scene4: files/2.mp4
+  scene5: files/3.mp4
+
+scene-times:
+  scene1: start
+  scene2: 00:00:05
+  scene3: 00:00:15
+  scene4: 00:00:40
+  scene5: end
+
+scene-include:
+  scene1: no
+  scene2: no
+  scene3: no
+  scene4: no
+  scene5: nox 
+

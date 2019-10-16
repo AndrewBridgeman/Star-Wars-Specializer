@@ -12,12 +12,15 @@ class Ffmpeg:
     def append(self, input):
         self._inputs.append(input)
 
+    def give_inputs(self):
+        return self._inputs
+
     def extend(self, inputs):
         self._inputs.extend(inputs)
 
     def write(self):
         ##Change this line to try different methods
-        command = self._concat_demuxer()
+        command = self._build_command()
         ##
         completed = subprocess.run(command,
                 capture_output = True)

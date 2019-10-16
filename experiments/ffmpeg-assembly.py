@@ -11,41 +11,51 @@ clipC = 'files/C.mp4'
 test1 = 'files/test1.mp4'
 test2 = 'files/test2.mp4'
 
+import yaml
+
 video_list = []
 
 def select(filename):
     end = False
     movie = Ffmpeg('final.mp4')
 
-    file = open(filename)
-    lines = file.readlines()
-    if lines[0].strip().rsplit()[0] == '(start)':
-        if lines[0].strip().rsplit()[1] != 'no':
-            movie.append('files/' + lines[0].strip().rsplit()[1] + '.mp4')
-        lines.remove(lines[0])
+    stream = open(filename, 'r')
+    text = yaml.safe_load(stream)
 
-    if lines[len(lines)-1].strip().rsplit()[0] == '(end)':
-        if lines[len(lines)-1].strip().rsplit()[1] != 'no':
+    count = 0
+    num_cuts = len(text['scene-include'])
+
+    if text['scene-times']['scene1'] == 'start':
+        num_cuts = num_cuts-1
+        if text['scene-include']['scene1'] == True:
+            movie.append(text['scene-paths']['scene1'])
+            count = 1
+
+    if text['scene-times']['scene' + str(len(text['scene-times']))] == 'end':
+        num_cuts = num_cuts - 1
+        if text['scene-include']['scene' + str(len(text['scene-times']))] == True:
             end = True
-            end_video = lines[len(lines)-1].strip().rsplit()[1]
-        lines.remove(lines[len(lines)-1])
 
-    for count in range(len(lines)+1):
-        video_list.append('out' + str(count+1) + '.mp4')
+    for i in range(num_cuts + 1):
+        video_list.append(text['output-name'] + str(i+1) + '.mp4')
 
-    for i in range(len(lines)):
-        movie.append(video_list[i])
-        if lines[i].strip() != 'no':
-            movie.append('files/' + lines[i].strip() + '.mp4')
+    video_list_count = 0
+
+    for i in range(count, num_cuts+count):
+        movie.append(video_list[video_list_count])
+        video_list_count = video_list_count+1
+        if text['scene-include']['scene' + str(i+1)] == True:
+            movie.append(text['scene-paths']['scene' + str(i+1)])
 
     movie.append(video_list[len(video_list)-1])
 
     if end == True:
-        movie.append('files/' + end_video + '.mp4')
+        movie.append(text['scene-paths']['scene' + str(len(text['scene-times']))])
 
+    print(movie.give_inputs())
     movie.write()
 
 
 if __name__ == '__main__':
     # everything()
-    select('ffmpeg-assembly-input.txt')
+    select('cutting-instructions.yaml')
