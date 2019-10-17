@@ -4,16 +4,15 @@ import sys
 class Ffmpeg_cutting:
     """Calls ffmpeg to append video files."""
 
-    def __init__(self, input, template):
+    def __init__(self, input):
         self._input = input
-        self._template = template
         self._outputs = []
 
-    def add_span(self, time1, time2):
-        self._outputs.append((time1, time2))
+    def add_span(self, time1, time2, name):
+        self._outputs.append((time1, time2, name))
 
-    def _fill_template(self, n):
-        return self._template.format(n)
+    def _fill_template(self, name, n):
+        return name.format(n)
 
     def write(self):
         ## TODO: loop over self._outputs
@@ -34,5 +33,5 @@ class Ffmpeg_cutting:
         command.extend(['-i', self._input])
         command.append('-ss')
         command.append(output[0])
-        command.append(self._fill_template(num+1))
+        command.append(self._fill_template(output[2], num+1))
         return command

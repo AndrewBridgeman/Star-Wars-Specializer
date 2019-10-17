@@ -5,29 +5,49 @@ def cut(filename):
     stream = open(filename, 'r')
     text = yaml.safe_load(stream)
     input = text['file-path']
-    output = text['output-name']
+    a_name = text['output-name-alternate']
+    name = text['output-name-not-alternate']
 
-    cutter = Ffmpeg_cutting(input, output + '{}.mp4')
+    cutter = Ffmpeg_cutting(input)
 
     if len(text['scene-times']) != 0:
-        count = 0
-        if text['scene-times']['scene1'] != 'start':
-            cutter.add_span('00:00:00', text['scene-times']['scene1'])
+        if vid_type(text['scene-times']['scene1']) == 'a':
+            cutter.add_span('00:00:00', text['scene-times']['scene1'][0], name)
+            cutter.add_span(text['scene-times']['scene1'][0], text['scene-times']['scene1'][1], a_name)
         else:
-            cutter.add_span('00:00:00', text['scene-times']['scene2'])
-            count = 1
+            cutter.add_span('00:00:00', text['scene-times']['scene1'], name)
 
-        for i in range(count, len(text['scene-times'])):
-            if i == len(text['scene-times']) - 1:
-                cutter.add_span(text['scene-times']['scene' + str(i+1)], '0')
-            else:
-                if text['scene-times']['scene' + str(i+2)] == 'end':
-                    cutter.add_span(text['scene-times']['scene' + str(i+1)], '0')
-                    break
+        for i in range(2, len(text['scene-times'])+1):
+            if vid_type(text['scene-times']['scene' + str(i)]) == 'd':
+                if vid_type(text['scene-times']['scene' + str(i-1)]) == 'd':
+                    cutter.add_span(text['scene-times']['scene' + str(i-1)], text['scene-times']['scene' + str(i)], name)
                 else:
-                    cutter.add_span(text['scene-times']['scene' + str(i+1)], text['scene-times']['scene' + str(i+2)])
+                    cutter.add_span(text['scene-times']['scene' + str(i-1)][1], text['scene-times']['scene' + str(i)], name)
+
+            if vid_type(text['scene-times']['scene' + str(i)]) == 'a':
+                if vid_type(text['scene-times']['scene' + str(i-1)]) == 'd':
+                    cutter.add_span(text['scene-times']['scene' + str(i-1)], text['scene-times']['scene' + str(i)][0], name)
+                else:
+                    cutter.add_span(text['scene-times']['scene' + str(i-1)][1], text['scene-times']['scene' + str(i)][0], name)
+
+                cutter.add_span(text['scene-times']['scene' + str(i)][0], text['scene-times']['scene' + str(i)][1], a_name)
+
+        last_num = len(text['scene-times'])
+
+        if vid_type(text['scene-times']['scene' + str(last_num)]) == 'd':
+            cutter.add_span(text['scene-times']['scene' + str(last_num)], '0', name)
+
+        else:
+            cutter.add_span(text['scene-times']['scene' + str(last_num)][1], '0', name)
 
     cutter.write()
+
+
+def vid_type(input):
+    if len(input) == 2:
+        return 'a'
+    else:
+        return 'd'
 
 if __name__ == '__main__':
     # everything()

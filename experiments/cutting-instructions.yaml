@@ -1,24 +1,28 @@
+#path to master video file
 file-path: files/test1.mp4
-output-name: out
 
+#name of video files cut that will remain in the final video (not alternate)
+output-name-not-alternate: x{}out.mp4
+
+#name of video files cut that may or may not remxvain in the final video (alternate)
+output-name-alternate: x{}alternate.mp4
+
+#paths to deleted/alternate scenes
 scene-paths:
-  scene1: files/B.mp4
-  scene2: files/C.mp4
-  scene3: files/1.mp4
-  scene4: files/2.mp4
-  scene5: files/3.mp4
+  scene1: files/1.mp4
+  scene2: files/2.mp4
+  scene3: files/3.mp4
 
+#timestamps where deleted scenes would appear (hh:mm:ss)
+#timestamps where alternate scenes would appear ([hh:mm:ss, hh:mm:ss])
+#must be in order
 scene-times:
-  scene1: start
-  scene2: 00:00:05
-  scene3: 00:00:15
-  scene4: 00:00:40
-  scene5: end
+  scene1: 00:00:05
+  scene2: [00:00:12, 00:00:20]
+  scene3: [00:00:30, 00:00:37]
 
+#include deleted/alternate scene or not (yes, no)
 scene-include:
   scene1: no
   scene2: no
   scene3: no
-  scene4: no
-  scene5: nox 
-
