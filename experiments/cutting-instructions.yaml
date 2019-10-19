@@ -17,13 +17,13 @@ scene-paths:
 #timestamps where original non-alternate scenes appear (that would be replaced by alternate scenes) ([hh:mm:ss, hh:mm:ss])
 #must be in order
 scene-times:
-  scene1: [00:00:05, 00:00:08]
+  scene1: [start, 00:00:08]
   scene2: 00:00:15
-  scene3: [00:00:30, 00:00:37]
+  scene3: [00:00:30, end]
 
 #include deleted/alternate scene or not (yes, no)
 #remember if alternate scene is included it will replace the original scene
 scene-include:
-  scene1: yes
+  scene1: no
   scene2: yes
   scene3: no

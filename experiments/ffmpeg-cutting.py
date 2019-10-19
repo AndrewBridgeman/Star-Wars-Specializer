@@ -12,8 +12,11 @@ def cut(filename):
 
     if len(text['scene-times']) != 0:
         if vid_type(text['scene-times']['scene1']) == 'a':
-            cutter.add_span('00:00:00', text['scene-times']['scene1'][0], name)
-            cutter.add_span(text['scene-times']['scene1'][0], text['scene-times']['scene1'][1], a_name)
+            if text['scene-times']['scene1'][0] == 'start':
+                cutter.add_span('00:00:00', text['scene-times']['scene1'][1], a_name)
+            else:
+                cutter.add_span('00:00:00', text['scene-times']['scene1'][0], name)
+                cutter.add_span(text['scene-times']['scene1'][0], text['scene-times']['scene1'][1], a_name)
         else:
             cutter.add_span('00:00:00', text['scene-times']['scene1'], name)
 
@@ -30,6 +33,9 @@ def cut(filename):
                 else:
                     cutter.add_span(text['scene-times']['scene' + str(i-1)][1], text['scene-times']['scene' + str(i)][0], name)
 
+                if text['scene-times']['scene' + str(i)][1] == 'end':
+                    break
+
                 cutter.add_span(text['scene-times']['scene' + str(i)][0], text['scene-times']['scene' + str(i)][1], a_name)
 
         last_num = len(text['scene-times'])
@@ -38,7 +44,11 @@ def cut(filename):
             cutter.add_span(text['scene-times']['scene' + str(last_num)], '0', name)
 
         else:
-            cutter.add_span(text['scene-times']['scene' + str(last_num)][1], '0', name)
+            if text['scene-times']['scene' + str(last_num)][1] == 'end':
+                cutter.add_span(text['scene-times']['scene' + str(last_num)][0], '0', a_name)
+            else:
+                cutter.add_span(text['scene-times']['scene' + str(last_num)][1], '0', name)
+
 
     cutter.write()
 
