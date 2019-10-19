@@ -10,20 +10,14 @@ output-name-alternate: x{}alternate.mp4
 #paths to deleted/alternate scenes
 scene-paths:
   scene1: files/1.mp4
-  scene2: files/2.mp4
-  scene3: files/3.mp4
 
 #timestamps where deleted scenes would appear (hh:mm:ss)
 #timestamps where original non-alternate scenes appear (that would be replaced by alternate scenes) ([hh:mm:ss, hh:mm:ss])
 #must be in order
 scene-times:
-  scene1: [start, 00:00:08]
-  scene2: 00:00:15
-  scene3: [00:00:30, end]
+  scene1: 00:00:05
 
 #include deleted/alternate scene or not (yes, no)
 #remember if alternate scene is included it will replace the original scene
 scene-include:
-  scene1: no
-  scene2: yes
-  scene3: no
+  scene1: yes

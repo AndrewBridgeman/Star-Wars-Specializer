@@ -14,6 +14,8 @@ def cut(filename):
         if vid_type(text['scene-times']['scene1']) == 'a':
             if text['scene-times']['scene1'][0] == 'start':
                 cutter.add_span('00:00:00', text['scene-times']['scene1'][1], a_name)
+            if text['scene-times']['scene1'][1] == 'end':
+                cutter.add_span('00:00:00', text['scene-times']['scene1'][0], name)
             else:
                 cutter.add_span('00:00:00', text['scene-times']['scene1'][0], name)
                 cutter.add_span(text['scene-times']['scene1'][0], text['scene-times']['scene1'][1], a_name)

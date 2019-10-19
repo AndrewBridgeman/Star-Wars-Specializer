@@ -40,7 +40,6 @@ def select(filename):
         else:
             video_list.append((text['output-name-alternate'].format(i), 'a'))
 
-    print(video_list)
 
     vid_count = 0
 
@@ -54,7 +53,6 @@ def select(filename):
 
     #Concat files
 
-    print(video_list)
     for i in range(j, len(text['scene-paths'])):
 
         if video_list[vid_count][1] == 'not-a':
