@@ -1,29 +1,51 @@
-#path to master video file
-file-path: files/test1.mp4
-
-#name of video files cut that will remain in the final video (not alternate)
-output-name-not-alternate: x{}out.mp4
-
-#name of video files cut that may or may not remain in the final video (alternate)
-output-name-alternate: x{}alternate.mp4
-
-#paths to deleted/alternate scenes
-scene-paths:
-  scene1: files/1.mp4
-  scene2: files/2.mp4
-  scene3: files/3.mp4
-
-#timestamps where deleted scenes would appear (hh:mm:ss)
-#timestamps where original non-alternate scenes appear (that would be replaced by alternate scenes) ([hh:mm:ss, hh:mm:ss])
-#must be in order
+##YAML document to outline deleted/alternate scenes and their timestamps
 scene-times:
-  scene1: 00:00:05
-  scene2: [00:00:10, 00:00:12]
-  scene3: [00:00:40, end]
+  #path to master video
+  from: files/test1.mp4
 
-#include deleted/alternate scene or not (yes, no)
-#remember if alternate scene is included it will replace the original scene
-scene-include:
-  scene1: yes
-  scene2: no
-  scene3: yes
+  #name of single scenes that will be outputted during cutting
+  single-scene-name: x{}out.mp4
+
+  #name of alternate scenes that will be outputted during cutting
+  alternate-name: x{}alternate.mp4
+
+
+  ##list of scenes that will be cut
+
+  #EXAMPLE 1: single scene
+    # - start: *start timestamp*
+    #   end: *end timestamp*
+  #EXAMPLE 2: deleted scene
+    # - deleted:
+    #   from: *path to deleted scene*
+  #EXAMPLE 3: alternate scene
+    # - alternate:
+    #   start: *start timestamp*
+    #   end: *end timestamp*
+    #   from: *path to deleted scene*
+
+  #timestamps are written as hh:mm:ss
+
+  #if a scene continues from an earlier cut, continue
+  #can be written instead of the prior timestamp
+  scenes:
+    - alternate:
+      from: files/A.mp4
+      start: start
+      end: 00:00:10
+
+    - start: continue
+      end: 00:00:15
+
+    - deleted:
+      from: files/1.mp4
+
+    - alternate:
+      from: files/2.mp4
+      start: continue
+      end: 00:00:40
+
+    - alternate:
+      from: files/3.mp4
+      start: continue
+      end: end

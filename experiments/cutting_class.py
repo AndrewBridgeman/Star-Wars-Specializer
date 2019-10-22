@@ -1,7 +1,7 @@
 import subprocess
 import sys
 
-class Ffmpeg_cutting:
+class cutting:
     """Calls ffmpeg to append video files."""
 
     def __init__(self, input):
@@ -15,7 +15,6 @@ class Ffmpeg_cutting:
         return name.format(n)
 
     def write(self):
-        ## TODO: loop over self._outputs
         for i in range(len(self._outputs)):
             command = self._build_command(self._outputs[i], i)
             completed = subprocess.run(command,

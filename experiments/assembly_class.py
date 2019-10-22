@@ -2,7 +2,7 @@ import subprocess
 import sys
 import os
 
-class Ffmpeg:
+class assembly:
     """Calls ffmpeg to append video files."""
 
     def __init__(self, output):

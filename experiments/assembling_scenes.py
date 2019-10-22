@@ -1,6 +1,6 @@
 #!/usr/bin/env pipenv run python
 
-from simple_ffmpeg import Ffmpeg
+from assembly_class import assembly
 
 import yaml
 import os.path
@@ -9,7 +9,7 @@ from os import path
 video_list = []
 
 def select(filename):
-    movie = Ffmpeg('final.mp4')
+    movie = assembly('final.mp4')
 
     stream = open(filename, 'r')
     text = yaml.safe_load(stream)

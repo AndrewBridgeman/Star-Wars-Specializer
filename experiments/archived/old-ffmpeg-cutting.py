@@ -5,9 +5,9 @@ def cut(filename):
     stream = open(filename, 'r')
     text = yaml.safe_load(stream)
     input = text['file-path']
+    print(text)
     a_name = text['output-name-alternate']
     name = text['output-name-not-alternate']
-
     cutter = Ffmpeg_cutting(input)
 
     if len(text['scene-times']) != 0:
