@@ -1,7 +1,7 @@
 ##YAML document to outline deleted/alternate scenes and their timestamps
 scene-times:
   #path to master video
-  from: files/test1.mp4
+  from: files/test3.mp4
 
   #name of single scenes that will be outputted during cutting
   single-scene-name: x{}out.mp4
@@ -32,20 +32,18 @@ scene-times:
     - alternate:
       from: files/A.mp4
       start: start
-      end: 00:00:10
+      end: 00:00:03
 
     - start: continue
-      end: 00:00:15
+      end: 00:00:05
 
     - deleted:
-      from: files/1.mp4
-
-    - alternate:
       from: files/2.mp4
-      start: continue
-      end: 00:00:40
+
+    - start: continue
+      end: 00:00:07
 
     - alternate:
-      from: files/3.mp4
+      from: files/B.mp4
       start: continue
       end: end

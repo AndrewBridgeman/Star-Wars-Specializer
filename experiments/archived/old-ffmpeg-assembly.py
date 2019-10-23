@@ -88,4 +88,4 @@ def vid_type(input):
 
 if __name__ == '__main__':
     # everything()
-    select('cutting-instructions.yaml')
+    select('instructions.yaml')

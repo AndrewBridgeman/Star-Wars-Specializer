@@ -1,16 +1,15 @@
 import subprocess
 import sys
-import os
+
 
 class assembly:
-    """Calls ffmpeg to append video files."""
 
     def __init__(self, output):
         self._output = output
         self._inputs = []
 
-    def append(self, input):
-        self._inputs.append(input)
+    def append(self, vid_input):
+        self._inputs.append(vid_input)
 
     def give_inputs(self):
         return self._inputs
@@ -19,9 +18,8 @@ class assembly:
         self._inputs.extend(inputs)
 
     def write(self):
-        ##Change this line to try different methods
+        # Change this line to try different methods
         command = self._build_command()
-        ##
         completed = subprocess.run(command,
                 capture_output = True)
         if completed.returncode != 0:

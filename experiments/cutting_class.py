@@ -1,11 +1,11 @@
 import subprocess
 import sys
 
-class cutting:
-    """Calls ffmpeg to append video files."""
 
-    def __init__(self, input):
-        self._input = input
+class cutting:
+
+    def __init__(self, vid_input):
+        self._input = vid_input
         self._outputs = []
 
     def add_span(self, time1, time2, name):
@@ -17,8 +17,7 @@ class cutting:
     def write(self):
         for i in range(len(self._outputs)):
             command = self._build_command(self._outputs[i], i)
-            completed = subprocess.run(command,
-                    capture_output = True)
+            completed = subprocess.run(command, capture_output=True)
             if completed.returncode != 0:
                 sys.stderr.write('Error from ffmpeg:\n')
                 sys.stderr.write(completed.stderr.decode())

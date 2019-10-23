@@ -11,6 +11,8 @@ class single_scene:
         else:
             self._end_time = end_time
 
+        self._path = ''
+
     def get_start_time(self):
         return self._start_time
 
@@ -23,3 +25,8 @@ class single_scene:
     def set_end_time(self, new_time):
         self._start_time = new_time
 
+    def get_path(self):
+        return self._path
+
+    def set_path(self, path):
+        self._path = path
