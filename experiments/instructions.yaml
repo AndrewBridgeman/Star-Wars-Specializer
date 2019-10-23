@@ -4,7 +4,7 @@ scene-times:
   from-original: files/original.mp4
 
   #path to "special edition" video with deleted/alternate scenes
-  from-special: files/special.mp4
+  from-special: files/special2.mp4
 
   #name of final outputted video
   to: final.mp4
@@ -43,31 +43,63 @@ scene-times:
 
   #if a scene continues from an earlier cut, continue
   #can be written instead of the prior timestamp
+
+#special1
+#  scenes:
+#    - deleted:
+#      special-start: start
+#      special-end: 00:00:02
+#
+#    - start: start
+#      end: 00:00:04
+#
+#    - alternate:
+#      start: continue
+#      end: 00:00:06
+#
+#      special-start: 00:00:06
+#      special-end: 00:00:08
+#
+#    - deleted:
+#      special-start: 00:00:08
+#      special-end: 00:00:10
+#
+#    - start: continue
+#      end: 00:00:08
+#
+#    - alternate:
+#      start: continue
+#      end: end
+#
+#      special-start: 00:00:12
+#      special-end: end
+
+#special2
   scenes:
-    - deleted:
+    - alternate:
+      start: start
+      end: 00:00:02
+
       special-start: start
       special-end: 00:00:02
 
-    - start: start
-      end: 00:00:04
+    - deleted:
+      special-start: 00:00:02
+      special-end: 00:00:04
+
+    - start: continue
+      end: 00:00:06
 
     - alternate:
       start: continue
-      end: 00:00:06
+      end: 00:00:08
 
       special-start: 00:00:08
       special-end: 00:00:10
 
-    - deleted:
-      special-start: 00:00:04
-      special-end: 00:00:06
-
     - start: continue
-      end: 00:00:08
-
-    - alternate:
-      start: continue
       end: end
 
+    - deleted:
       special-start: 00:00:12
       special-end: end

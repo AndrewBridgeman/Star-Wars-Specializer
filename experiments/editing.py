@@ -22,6 +22,11 @@ class editing:
         cutter_original = cutting(original_video)
         cutter_special = cutting(special_video)
 
+        # cutter_original.add_span('00:00:00', '00:00:10', 'temp{}.mp4', 1)
+        # cutter_original.add_span('00:00:10', '00:00:24', 'temp{}.mp4', 2)
+        # cutter_original.add_span('00:00:24', '0', 'temp{}.mp4', 3)
+        # cutter_original.write()
+
         previous_time = '00:00:00'
 
         for i in range(len(self._text['scene-times']['scenes'])):

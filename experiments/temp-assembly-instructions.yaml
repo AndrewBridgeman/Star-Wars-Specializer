@@ -1,5 +1,13 @@
+#special1
+#scene-include:
+#  deleted1: yes
+#  alternate2: yes
+#  deleted3: yes
+#  alternate4: yes
+
+#special2
 scene-include:
-  deleted1: yes
-  alternate2: yes
-  deleted3: yes
-  alternate4: yes
+  alternate1: yes
+  deleted2: no
+  alternate3: no
+  deleted4: yes
