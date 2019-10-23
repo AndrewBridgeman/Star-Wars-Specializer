@@ -19,7 +19,7 @@ class assembly:
 
     def write(self):
         # Change this line to try different methods
-        command = self._build_command()
+        command = self._concat_demuxer()
         completed = subprocess.run(command,
                 capture_output = True)
         if completed.returncode != 0:

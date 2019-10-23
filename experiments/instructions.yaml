@@ -1,13 +1,25 @@
 ##YAML document to outline deleted/alternate scenes and their timestamps
 scene-times:
-  #path to master video
-  from: files/test3.mp4
+  #path to original, unedited video
+  from-original: files/original.mp4
+
+  #path to "special edition" video with deleted/alternate scenes
+  from-special: files/special.mp4
+
+  #name of final outputted video
+  to: final.mp4
 
   #name of single scenes that will be outputted during cutting
   single-scene-name: x{}out.mp4
 
-  #name of alternate scenes that will be outputted during cutting
-  alternate-name: x{}alternate.mp4
+  #name of alternate scenes that will be outputted from original file during cutting
+  original-alternate-name: x{}original-alternate.mp4
+
+  #name of alternate scenes that will be outputted from special file during cutting
+  special-alternate-name: x{}special-alternate.mp4
+
+  #name of deleted scenes that will be outputted during cutting
+  deleted-name: x{}deleted.mp4
 
 
   ##list of scenes that will be cut
@@ -17,33 +29,45 @@ scene-times:
     #   end: *end timestamp*
   #EXAMPLE 2: deleted scene
     # - deleted:
-    #   from: *path to deleted scene*
+    #   special-start: *start timestamp in special video*
+    #   special-end: *end timestamp in special video*
   #EXAMPLE 3: alternate scene
     # - alternate:
-    #   start: *start timestamp*
-    #   end: *end timestamp*
-    #   from: *path to deleted scene*
+    #   start: *start timestamp in original video*
+    #   end: *end timestamp in original video*
+    #
+    #   special-start: *start timestamp in special video*
+    #   special-end: *end timestamp in special video*
 
   #timestamps are written as hh:mm:ss
 
   #if a scene continues from an earlier cut, continue
   #can be written instead of the prior timestamp
   scenes:
-    - alternate:
-      from: files/A.mp4
-      start: start
-      end: 00:00:03
+    - deleted:
+      special-start: start
+      special-end: 00:00:02
 
-    - start: continue
-      end: 00:00:05
+    - start: start
+      end: 00:00:04
+
+    - alternate:
+      start: continue
+      end: 00:00:06
+
+      special-start: 00:00:08
+      special-end: 00:00:10
 
     - deleted:
-      from: files/2.mp4
+      special-start: 00:00:04
+      special-end: 00:00:06
 
     - start: continue
-      end: 00:00:07
+      end: 00:00:08
 
     - alternate:
-      from: files/B.mp4
       start: continue
       end: end
+
+      special-start: 00:00:12
+      special-end: end

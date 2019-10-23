@@ -1,0 +1,6 @@
+file 'x1deleted.mp4'
+file 'x2out.mp4'
+file 'x4special-alternate.mp4'
+file 'x5deleted.mp4'
+file 'x6out.mp4'
+file 'x8special-alternate.mp4'

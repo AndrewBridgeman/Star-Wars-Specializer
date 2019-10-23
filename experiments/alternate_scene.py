@@ -1,38 +1,61 @@
 class alternate_scene:
 
-    # _new_path is the alternate scene
-    # _original_path is the section of the original video that would be replaced by the alternate scene
-    def __init__(self, start_time, end_time, new_path):
-        if start_time == 'start':
-            self._start_time = '00:00:00'
+    def __init__(self, original_start_time, original_end_time, special_start_time, special_end_time):
+        if original_start_time == 'start':
+            self._original_start_time = '00:00:00'
         else:
-            self._start_time = start_time
+            self._original_start_time = original_start_time
 
-        if end_time == 'end':
-            self._end_time = '0'
+        if original_end_time == 'end':
+            self._original_end_time = '0'
         else:
-            self._end_time = end_time
+            self._original_end_time = original_end_time
 
-        self._original_path = ''
-        self._new_path = new_path
+        if special_start_time == 'start':
+            self._special_start_time = '00:00:00'
+        else:
+            self._special_start_time = special_start_time
 
-    def get_start_time(self):
-        return self._start_time
+        if special_end_time == 'end':
+            self._special_end_time = '0'
+        else:
+            self._special_end_time = special_end_time
 
-    def get_end_time(self):
-        return self._end_time
+        self._original_cut = ''
+        self._special_cut = ''
 
-    def set_start_time(self, new_time):
-        self._start_time = new_time
+    def get_original_start_time(self):
+        return self._original_start_time
 
-    def set_end_time(self, new_time):
-        self._start_time = new_time
+    def get_original_end_time(self):
+        return self._original_end_time
 
-    def get_original_path(self):
-        return self._original_path
+    def set_original_start_time(self, new_time):
+        self._original_start_time = new_time
 
-    def get_new_path(self):
-        return self._new_path
+    def set_original_end_time(self, new_time):
+        self._original_end_time = new_time
 
-    def set_path(self, path):
-        self._original_path = path
+    def get_special_start_time(self):
+        return self._special_start_time
+
+    def get_special_end_time(self):
+        return self._special_end_time
+
+    def set_special_start_time(self, new_time):
+        self._special_start_time = new_time
+
+    def set_special_end_time(self, new_time):
+        self._special_end_time = new_time
+
+    def get_original_cut(self):
+        return self._original_cut
+
+    def get_special_cut(self):
+        return self._special_cut
+
+    def set_original_cut(self, cut):
+        self._original_cut = cut
+
+    def set_special_cut(self, cut):
+        self._special_cut = cut
