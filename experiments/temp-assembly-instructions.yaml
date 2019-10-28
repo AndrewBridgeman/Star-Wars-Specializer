@@ -6,8 +6,12 @@
 #  alternate4: yes
 
 #special2
-scene-include:
-  alternate1: yes
-  deleted2: no
-  alternate3: no
-  deleted4: yes
+#alternate
+#deleted
+#alternate
+#deleted
+scene -include:
+  a1: no
+  a2: no
+  a3: no
+  a4: no

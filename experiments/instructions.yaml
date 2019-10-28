@@ -1,10 +1,10 @@
 ##YAML document to outline deleted/alternate scenes and their timestamps
 scene-times:
   #path to original, unedited video
-  from-original: files/original.mp4
+  original: files/original.mp4
 
   #path to "special edition" video with deleted/alternate scenes
-  from-special: files/special2.mp4
+  special: files/special2.mp4
 
   #name of final outputted video
   to: final.mp4
@@ -76,30 +76,44 @@ scene-times:
 
 #special2
   scenes:
-    - alternate:
-      start: start
-      end: 00:00:02
+    - alternatives:
+        - from: original
+          start: start
+          end: 00:00:02
 
-      special-start: start
-      special-end: 00:00:02
+        - from: special
+          start: start
+          end: 00:00:02
 
-    - deleted:
-      special-start: 00:00:02
-      special-end: 00:00:04
+    - alternatives:
+        - from: original
+          start: none
+          end: none
+
+        - from: special
+          start: 00:00:02
+          end: 00:00:04
 
     - start: continue
       end: 00:00:06
 
-    - alternate:
-      start: continue
-      end: 00:00:08
+    - alternatives:
+        - from: original
+          start: continue
+          end: 00:00:08
 
-      special-start: 00:00:08
-      special-end: 00:00:10
+        - from: special
+          start: 00:00:08
+          end: 00:00:10
 
     - start: continue
       end: end
 
-    - deleted:
-      special-start: 00:00:12
-      special-end: end
+    - alternatives:
+        - from: original
+          start: none
+          end: none
+
+        - from: special
+          start: 00:00:12
+          end: end 

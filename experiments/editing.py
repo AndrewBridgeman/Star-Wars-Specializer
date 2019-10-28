@@ -10,14 +10,15 @@ import yaml
 
 class editing:
     def __init__(self, filename):
+        #convert data here
         self._text = yaml.safe_load(open(filename, 'r'))
         self._video_list = []
 
     def cut(self):
         num_count = 1
 
-        original_video = (self._text['scene-times']['from-original'])
-        special_video = (self._text['scene-times']['from-special'])
+        original_video = (self._text['scene-times']['original'])
+        special_video = (self._text['scene-times']['special'])
 
         cutter_original = cutting(original_video)
         cutter_special = cutting(special_video)
@@ -33,56 +34,49 @@ class editing:
 
             current = self._text['scene-times']['scenes'][i]
 
-            if 'deleted' in (current.keys()):
-                new_scene = deleted_scene(special_video, current['special-start'], current['special-end'])
-                file_name = self._text['scene-times']['deleted-name']
-                new_scene.set_cut(file_name.format(num_count))
+            if 'alternatives' in (current.keys()):
+                current = current['alternatives']
+                new_scene = alternate_scene(current[0]['start'], current[0]['end'], \
+                                            current[1]['start'], current[1]['end'])
 
-                self._video_list.append(new_scene)
-                cutter_special.add_span(new_scene.get_start_time(), new_scene.get_end_time(), file_name, num_count)
-                num_count = num_count + 1
+                file_name_original = self._text['scene-times']['original-alternate-name']
+                file_name_special = self._text['scene-times']['special-alternate-name']
 
-            else:
-                if 'alternate' in (current.keys()):
-                    new_scene = alternate_scene(current['start'], current['end'], \
-                                                current['special-start'], current['special-end'])
-                    file_name_original = self._text['scene-times']['original-alternate-name']
-                    file_name_special = self._text['scene-times']['special-alternate-name']
+                if new_scene.get_original_start_time() == 'continue':
+                    new_scene.set_original_start_time(previous_time)
 
-                    if new_scene.get_original_start_time() == 'continue':
-                        new_scene.set_original_start_time(previous_time)
-
+                if current[0]['start'] != 'none':
                     new_scene.set_original_cut(file_name_original.format(num_count))
                     cutter_original.add_span(new_scene.get_original_start_time(), new_scene.get_original_end_time(),
                                              file_name_original, num_count)
-
                     num_count = num_count + 1
-
-                    new_scene.set_special_cut(file_name_special.format(num_count))
-                    cutter_special.add_span(new_scene.get_special_start_time(), new_scene.get_special_end_time(),\
-                                            file_name_special, num_count)
-
-                    num_count = num_count + 1
-
                     previous_time = new_scene.get_original_end_time()
 
-                    self._video_list.append(new_scene)
 
-                # single scene case
-                else:
-                    new_scene = single_scene(current['start'], current['end'])
-                    file_name = self._text['scene-times']['single-scene-name']
+                new_scene.set_special_cut(file_name_special.format(num_count))
+                cutter_special.add_span(new_scene.get_special_start_time(), new_scene.get_special_end_time(),\
+                                        file_name_special, num_count)
 
-                    if new_scene.get_start_time() == 'continue':
-                        new_scene.set_start_time(previous_time)
+                num_count = num_count + 1
 
-                    new_scene.set_cut(file_name.format(num_count))
 
-                    self._video_list.append(new_scene)
-                    cutter_original.add_span(new_scene.get_start_time(), new_scene.get_end_time(), file_name, num_count)
-                    previous_time = new_scene.get_end_time()
+                self._video_list.append(new_scene)
 
-                    num_count = num_count + 1
+            # single scene case
+            else:
+                new_scene = single_scene(current['start'], current['end'])
+                file_name = self._text['scene-times']['single-scene-name']
+
+                if new_scene.get_start_time() == 'continue':
+                    new_scene.set_start_time(previous_time)
+
+                new_scene.set_cut(file_name.format(num_count))
+
+                self._video_list.append(new_scene)
+                cutter_original.add_span(new_scene.get_start_time(), new_scene.get_end_time(), file_name, num_count)
+                previous_time = new_scene.get_end_time()
+
+                num_count = num_count + 1
 
         cutter_original.write()
         cutter_special.write()
@@ -100,17 +94,12 @@ class editing:
                 movie.append(self._video_list[i].get_cut())
 
             elif isinstance(self._video_list[i], alternate_scene):
-                if temp_instructions['scene-include']['alternate' + str(instructions_count + 1)]:
+                if temp_instructions['scene-include']['a' + str(instructions_count + 1)]:
                     movie.append(self._video_list[i].get_special_cut())
 
                 else:
-                    movie.append(self._video_list[i].get_original_cut())
-
-                instructions_count = instructions_count + 1
-
-            elif isinstance(self._video_list[i], deleted_scene):
-                if temp_instructions['scene-include']['deleted' + str(instructions_count + 1)]:
-                    movie.append(self._video_list[i].get_cut())
+                    if self._video_list[i].get_original_cut() != '':
+                        movie.append(self._video_list[i].get_original_cut())
 
                 instructions_count = instructions_count + 1
 

@@ -1,5 +1,4 @@
-file 'x2special-alternate.mp4'
+file 'x1original-alternate.mp4'
 file 'x4out.mp4'
 file 'x5original-alternate.mp4'
 file 'x7out.mp4'
-file 'x8deleted.mp4'

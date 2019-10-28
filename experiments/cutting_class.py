@@ -9,7 +9,8 @@ class cutting:
         self._outputs = []
 
     def add_span(self, time1, time2, name, num):
-        self._outputs.append((time1, time2, name, num))
+        if time1 != 'none' and time2!= 'none':
+            self._outputs.append((time1, time2, name, num))
 
     def _fill_template(self, name, n):
         return name.format(n)
