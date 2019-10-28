@@ -1,14 +1,13 @@
-from cutting_class import cutting
-from assembly_class import assembly
+from cutting_class import Cutting
+from assembly_class import Assembly
 
-from single_scene import single_scene
-from deleted_scene import deleted_scene
-from alternate_scene import alternate_scene
+from single_scene import SingleScene
+from alternate_scene import AlternateScene
 
 import yaml
 
 
-class editing:
+class Editing:
     def __init__(self, filename):
         #convert data here
         self._text = yaml.safe_load(open(filename, 'r'))
@@ -20,8 +19,8 @@ class editing:
         original_video = (self._text['scene-times']['original'])
         special_video = (self._text['scene-times']['special'])
 
-        cutter_original = cutting(original_video)
-        cutter_special = cutting(special_video)
+        cutter_original = Cutting(original_video)
+        cutter_special = Cutting(special_video)
 
         # cutter_original.add_span('00:00:00', '00:00:10', 'temp{}.mp4', 1)
         # cutter_original.add_span('00:00:10', '00:00:24', 'temp{}.mp4', 2)
@@ -33,24 +32,23 @@ class editing:
         for i in range(len(self._text['scene-times']['scenes'])):
 
             current = self._text['scene-times']['scenes'][i]
-
             if 'alternatives' in (current.keys()):
                 current = current['alternatives']
-                new_scene = alternate_scene(current[0]['start'], current[0]['end'], \
+                new_scene = AlternateScene(current[0]['start'], current[0]['end'], 'alternative', \
                                             current[1]['start'], current[1]['end'])
 
-                file_name_original = self._text['scene-times']['original-alternate-name']
-                file_name_special = self._text['scene-times']['special-alternate-name']
+                file_name_original = 'x{}original.mp4'
+                file_name_special = 'x{}special.mp4'
 
-                if new_scene.get_original_start_time() == 'continue':
-                    new_scene.set_original_start_time(previous_time)
+                if new_scene.get_start_time() == 'continue':
+                    new_scene.set_start_time(previous_time)
 
                 if current[0]['start'] != 'none':
-                    new_scene.set_original_cut(file_name_original.format(num_count))
-                    cutter_original.add_span(new_scene.get_original_start_time(), new_scene.get_original_end_time(),
+                    new_scene.set_cut(file_name_original.format(num_count))
+                    cutter_original.add_span(new_scene.get_start_time(), new_scene.get_end_time(),
                                              file_name_original, num_count)
                     num_count = num_count + 1
-                    previous_time = new_scene.get_original_end_time()
+                    previous_time = new_scene.get_end_time()
 
 
                 new_scene.set_special_cut(file_name_special.format(num_count))
@@ -59,13 +57,12 @@ class editing:
 
                 num_count = num_count + 1
 
-
                 self._video_list.append(new_scene)
 
             # single scene case
             else:
-                new_scene = single_scene(current['start'], current['end'])
-                file_name = self._text['scene-times']['single-scene-name']
+                new_scene = SingleScene(current['start'], current['end'], 'single')
+                file_name = 'x{}single.mp4'
 
                 if new_scene.get_start_time() == 'continue':
                     new_scene.set_start_time(previous_time)
@@ -84,22 +81,22 @@ class editing:
     def assemble(self):
         temp_instructions = yaml.safe_load(open('temp-assembly-instructions.yaml', 'r'))
 
-        movie = assembly(self._text['scene-times']['to'])
+        movie = Assembly(self._text['scene-times']['to'])
 
         instructions_count = 0
 
         for i in range(len(self._video_list)):
 
-            if isinstance(self._video_list[i], single_scene):
+            if self._video_list[i].get_type() == 'single':
                 movie.append(self._video_list[i].get_cut())
 
-            elif isinstance(self._video_list[i], alternate_scene):
+            elif self._video_list[i].get_type() == 'alternative':
                 if temp_instructions['scene-include']['a' + str(instructions_count + 1)]:
                     movie.append(self._video_list[i].get_special_cut())
 
                 else:
-                    if self._video_list[i].get_original_cut() != '':
-                        movie.append(self._video_list[i].get_original_cut())
+                    if self._video_list[i].get_cut() != '':
+                        movie.append(self._video_list[i].get_cut())
 
                 instructions_count = instructions_count + 1
 

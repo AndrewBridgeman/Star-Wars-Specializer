@@ -2,7 +2,7 @@ import subprocess
 import sys
 
 
-class assembly:
+class Assembly:
 
     def __init__(self, output):
         self._output = output

@@ -9,18 +9,6 @@ scene-times:
   #name of final outputted video
   to: final.mp4
 
-  #name of single scenes that will be outputted during cutting
-  single-scene-name: x{}out.mp4
-
-  #name of alternate scenes that will be outputted from original file during cutting
-  original-alternate-name: x{}original-alternate.mp4
-
-  #name of alternate scenes that will be outputted from special file during cutting
-  special-alternate-name: x{}special-alternate.mp4
-
-  #name of deleted scenes that will be outputted during cutting
-  deleted-name: x{}deleted.mp4
-
 
   ##list of scenes that will be cut
 
@@ -116,4 +104,4 @@ scene-times:
 
         - from: special
           start: 00:00:12
-          end: end 
+          end: end

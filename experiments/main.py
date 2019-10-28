@@ -1,5 +1,5 @@
-from editing import editing
+from editing import Editing
 
-video = editing('instructions.yaml')
+video = Editing('instructions.yaml')
 video.cut()
 video.assemble()

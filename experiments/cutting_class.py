@@ -2,7 +2,7 @@ import subprocess
 import sys
 
 
-class cutting:
+class Cutting:
 
     def __init__(self, vid_input):
         self._input = vid_input
