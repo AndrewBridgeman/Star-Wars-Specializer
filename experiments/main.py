@@ -1,5 +1,5 @@
 from editing import Editing
 
 video = Editing('instructions.yaml')
-video.cut()
-video.assemble()
+#video.cut('cuts')
+video.assemble('cuts')

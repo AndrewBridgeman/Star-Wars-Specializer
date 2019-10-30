@@ -4,9 +4,10 @@ import sys
 
 class Cutting:
 
-    def __init__(self, vid_input):
+    def __init__(self, vid_input, clipdir):
         self._input = vid_input
         self._outputs = []
+        self._dir = clipdir
 
     def add_span(self, time1, time2, name, num):
         if time1 != 'none' and time2!= 'none':
@@ -32,5 +33,5 @@ class Cutting:
         command.extend(['-i', self._input])
         command.append('-ss')
         command.append(output[0])
-        command.append(self._fill_template(output[2], output[3]))
+        command.append(self._dir + '/' + self._fill_template(output[2], output[3]))
         return command

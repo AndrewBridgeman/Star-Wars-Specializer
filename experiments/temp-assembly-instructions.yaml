@@ -11,7 +11,7 @@
 #alternate
 #deleted
 scene-include:
-  a1: no
-  a2: no
-  a3: no
-  a4: no
+  a1: yes
+  a2: yes
+  a3: yes
+  a4: yes
