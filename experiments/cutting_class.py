@@ -4,13 +4,13 @@ import sys
 
 class Cutting:
 
-    def __init__(self, vid_input, clipdir):
+    def __init__(self, vid_input, clip_dir):
         self._input = vid_input
         self._outputs = []
-        self._dir = clipdir
+        self._dir = clip_dir
 
     def add_span(self, time1, time2, name, num):
-        if time1 != 'none' and time2!= 'none':
+        if time1 != 'none' and time2 != 'none':
             self._outputs.append((time1, time2, name, num))
 
     def _fill_template(self, name, n):

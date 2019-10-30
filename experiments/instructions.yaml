@@ -1,15 +1,5 @@
 ##YAML document to outline deleted/alternate scenes and their timestamps
 scene-times:
-  #path to original, unedited video
-  original: files/original.mp4
-
-  #path to "special edition" video with deleted/alternate scenes
-  special: files/special2.mp4
-
-  #name of final outputted video
-  to: final.mp4
-
-
   ##list of scenes that will be cut
 
   #EXAMPLE 1: single scene

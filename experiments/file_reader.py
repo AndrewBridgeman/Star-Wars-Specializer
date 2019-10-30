@@ -1,6 +1,7 @@
 from alternate_scene import AlternateScene
 from single_scene import SingleScene
 
+
 class FileReader:
     def __init__(self, text):
         self._text = text
@@ -35,17 +36,13 @@ class FileReader:
                 if current[0]['start'] != 'none':
                     new_scene.set_cut(file_name_original.format(num_count))
                     self._original_instructions.append((new_scene.get_start_time(), new_scene.get_end_time(), \
-                                                  file_name_original, num_count))
-                    #cutter_original.add_span(new_scene.get_start_time(), new_scene.get_end_time(),
-                                             #file_name_original, num_count)
+                                                        file_name_original, num_count))
                     num_count = num_count + 1
                     previous_time = new_scene.get_end_time()
 
                 new_scene.set_special_cut(file_name_special.format(num_count))
                 self._special_instructions.append((new_scene.get_special_start_time(), new_scene.get_special_end_time(), \
-                                        file_name_special, num_count))
-                #cutter_special.add_span(new_scene.get_special_start_time(), new_scene.get_special_end_time(), \
-                                        #file_name_special, num_count)
+                                                   file_name_special, num_count))
 
                 num_count = num_count + 1
 
@@ -63,8 +60,6 @@ class FileReader:
 
                 self._video_list.append(new_scene)
                 self._original_instructions.append((new_scene.get_start_time(), new_scene.get_end_time(), file_name, num_count))
-                previous_time = new_scene.get_end_time()
-                #cutter_original.add_span(new_scene.get_start_time(), new_scene.get_end_time(), file_name, num_count)
                 previous_time = new_scene.get_end_time()
 
                 num_count = num_count + 1

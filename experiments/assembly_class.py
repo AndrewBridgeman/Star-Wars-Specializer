@@ -20,8 +20,7 @@ class Assembly:
     def write(self):
         # Change this line to try different methods
         command = self._concat_demuxer()
-        completed = subprocess.run(command,
-                capture_output = True)
+        completed = subprocess.run(command, capture_output=True)
         if completed.returncode != 0:
             sys.stderr.write('Error from ffmpeg:\n')
             sys.stderr.write(completed.stderr.decode())
