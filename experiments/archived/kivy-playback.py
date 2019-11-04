@@ -36,13 +36,16 @@ class check_box(GridLayout):
         self.cols = 2
 
         # Add checkbox, Label and Widget
-        self.add_widget(Label(text='Male'))
+        self.add_widget(Label(text='1'))
         self.active = CheckBox(active=True)
         self.add_widget(self.active)
 
-        # Adding label to scrren
-        self.lbl_active = Label(text='Checkbox is on')
-        self.add_widget(self.lbl_active)
+        self.active.bind(active=self.on_checkbox_Active)
+
+
+        self.add_widget(Label(text='2'))
+        self.active = CheckBox(active=True)
+        self.add_widget(self.active)
 
         # Attach a callback
         self.active.bind(active=self.on_checkbox_Active)
@@ -51,10 +54,8 @@ class check_box(GridLayout):
 
     def on_checkbox_Active(self, checkboxInstance, isActive):
         if isActive:
-            self.lbl_active.text = "Checkbox is ON"
             print("Checkbox Checked")
         else:
-            self.lbl_active.text = "Checkbox is OFF"
             print("Checkbox unchecked")
 
         # App derived from App class
