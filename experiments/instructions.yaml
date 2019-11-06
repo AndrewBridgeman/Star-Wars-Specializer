@@ -55,6 +55,7 @@ scene-times:
 #special2
   scenes:
     - alternatives:
+        - name: cantina
         - from: original
           start: start
           end: 00:00:02
@@ -64,6 +65,7 @@ scene-times:
           end: 00:00:02
 
     - alternatives:
+        - name: jabba
         - from: original
           start: none
           end: none
@@ -76,6 +78,7 @@ scene-times:
       end: 00:00:06
 
     - alternatives:
+        - name: solo
         - from: original
           start: continue
           end: 00:00:08
@@ -88,6 +91,7 @@ scene-times:
       end: end
 
     - alternatives:
+        - name: vader
         - from: original
           start: none
           end: none

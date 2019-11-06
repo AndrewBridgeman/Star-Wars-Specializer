@@ -14,6 +14,7 @@ class Editing:
         self._original_instructions = data.get_original_instructions()
         self._special_instructions = data.get_special_instructions()
         self._video_list = data.get_video_list()
+        self._names = data.get_names()
 
     def cut(self, original, special, clip_dir):
         cutter_original = Cutting(original, clip_dir)
@@ -33,9 +34,7 @@ class Editing:
         cutter_original.write()
         cutter_special.write()
 
-    def assemble(self, clip_dir, output):
-        temp_instructions = yaml.safe_load(open('temp-assembly-instructions.yaml', 'r'))
-
+    def assemble(self, clip_dir, choices, output):
         movie = Assembly(output)
 
         instructions_count = 0
@@ -46,7 +45,7 @@ class Editing:
                 movie.append(clip_dir + '/' + self._video_list[i].get_cut())
 
             elif self._video_list[i].get_type() == 'alternative':
-                if temp_instructions['scene-include']['a' + str(instructions_count + 1)]:
+                if choices[instructions_count]:
                     movie.append(clip_dir + '/' + self._video_list[i].get_special_cut())
 
                 else:
@@ -58,3 +57,6 @@ class Editing:
         print(movie.give_inputs())
 
         movie.write()
+
+    def get_names(self):
+        return self._names

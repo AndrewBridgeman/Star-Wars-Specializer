@@ -8,6 +8,7 @@ class FileReader:
         self._original_instructions = []
         self._special_instructions = []
         self._video_list = []
+        self._names = []
 
     def read(self):
         num_count = 1
@@ -22,10 +23,12 @@ class FileReader:
         for i in range(len(self._text['scene-times']['scenes'])):
 
             current = self._text['scene-times']['scenes'][i]
+
             if 'alternatives' in (current.keys()):
                 current = current['alternatives']
-                new_scene = AlternateScene(current[0]['start'], current[0]['end'], 'alternative', \
-                                           current[1]['start'], current[1]['end'])
+                self._names.append(current[0]['name'])
+                new_scene = AlternateScene(current[1]['start'], current[1]['end'], 'alternative', \
+                                           current[2]['start'], current[2]['end'])
 
                 file_name_original = 'x{}original.mp4'
                 file_name_special = 'x{}special.mp4'
@@ -33,7 +36,7 @@ class FileReader:
                 if new_scene.get_start_time() == 'continue':
                     new_scene.set_start_time(previous_time)
 
-                if current[0]['start'] != 'none':
+                if current[1]['start'] != 'none':
                     new_scene.set_cut(file_name_original.format(num_count))
                     self._original_instructions.append((new_scene.get_start_time(), new_scene.get_end_time(), \
                                                         file_name_original, num_count))
@@ -72,3 +75,6 @@ class FileReader:
 
     def get_video_list(self):
         return self._video_list
+
+    def get_names(self):
+        return self._names
