@@ -18,6 +18,8 @@ from kivy.uix.label import Label
 # To use the checkbox must import it from this module
 from kivy.uix.checkbox import CheckBox
 
+from kivy.uix.button import Button
+
 # The GridLayout arranges children in a matrix.
 # imports the GridLayout class for use in the app.
 from kivy.uix.gridlayout import GridLayout
@@ -32,7 +34,7 @@ class LabeledChoice:
         check_box.bind(active=self._on_click)
 
     def _on_click(self, instance, is_active):
-        print(self.label() + str(is_active))
+        #print(self.label() + str(is_active))
         self._is_active = is_active
 
     def label(self):
@@ -40,6 +42,15 @@ class LabeledChoice:
 
     def is_active(self):
         return self._is_active
+
+class myButton:
+    def __init__(self, layout, choices):
+        button = Button(text = 'Done', font_size = 30)
+        def callback(instance):
+            for i in range(len(choices)):
+                print(choices[i].label() + ": " + str(choices[i].is_active()))
+        button.bind(on_press = callback)
+        layout.add_widget(button)
 
 
 class BunchOfChoices(GridLayout):
@@ -50,18 +61,23 @@ class BunchOfChoices(GridLayout):
         for label in labels:
             widget = LabeledChoice(label, self)
             self._choices.append(widget)
+        myButton(self, self._choices)
 
 
+class Checkboxes:
+    def __init__(self, cuts):
+        self._cuts = cuts
 
-class CheckBoxApp(App):
-    def build(self):
-        # build is a method of Kivy's App class used
-        # to place widgets onto the GUI.
-        choices = ['1', '2', 'Andrew', '3']
-        return BunchOfChoices(choices)
+    def make_window(self):
+        window = BunchOfChoices(self._cuts)
+        class CheckBoxApp(App):
+            def build(self):
+                # build is a method of Kivy's App class used
+                # to place widgets onto the GUI.
+                return window
 
-    # Run the app
+        if __name__ == '__main__':
+            CheckBoxApp().run()
 
 
-if __name__ == '__main__':
-    CheckBoxApp().run()
+Checkboxes(['1','2','3']).make_window()
