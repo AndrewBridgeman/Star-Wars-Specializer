@@ -3,6 +3,7 @@ from window import Window
 from window import MyButton
 from kivy.app import App
 
+
 video = Editing('instructions.yaml')
 
 # video.cut('files/original.mp4', 'files/special2.mp4', 'cuts')]

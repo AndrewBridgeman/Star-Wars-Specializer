@@ -6,13 +6,16 @@ from kivy.uix.button import Button
 
 from kivy.uix.gridlayout import GridLayout
 
+from kivy.core.window import Window
+Window.clearcolor = (1, 1, 1, 1)
+
 
 class LabeledChoice:
-    def __init__(self, label, layout, initial=True):
+    def __init__(self, label, layout, initial=False):
         self._label = label
         self._is_active = initial
         check_box = CheckBox(active=initial)
-        layout.add_widget(Label(text=label))
+        layout.add_widget(Label(text=label , color = [0, 0, 0, 1]))
         layout.add_widget(check_box)
         check_box.bind(active=self._on_click)
 

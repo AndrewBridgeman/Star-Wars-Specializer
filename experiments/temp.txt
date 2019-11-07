@@ -1,5 +1,4 @@
-file 'cuts/x2special.mp4'
-file 'cuts/x3special.mp4'
+file 'cuts/x1original.mp4'
 file 'cuts/x4single.mp4'
 file 'cuts/x6special.mp4'
 file 'cuts/x7single.mp4'
