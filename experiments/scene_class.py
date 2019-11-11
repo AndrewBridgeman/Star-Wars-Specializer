@@ -1,5 +1,5 @@
 class Scene:
-    def __init__(self, start_time, end_time, type):
+    def __init__(self, start_time, end_time, type_scene):
         if start_time == 'start':
             self._start_time = '00:00:00'
         else:
@@ -11,7 +11,7 @@ class Scene:
             self._end_time = end_time
 
         self._cut = ''
-        self._type = type
+        self._type = type_scene
 
     def set_start_time(self, time):
         self._start_time = time

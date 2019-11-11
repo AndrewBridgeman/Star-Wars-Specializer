@@ -3,9 +3,9 @@ from scene_class import Scene
 
 class AlternateScene(Scene):
 
-    def __init__(self, start_time, end_time, type, special_start_time, special_end_time):
+    def __init__(self, start_time, end_time, type_scene, special_start_time, special_end_time):
 
-        super().__init__(start_time, end_time, type)
+        super().__init__(start_time, end_time, type_scene)
 
         if special_start_time == 'start':
             self._special_start_time = '00:00:00'

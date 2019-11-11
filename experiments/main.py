@@ -3,16 +3,11 @@ from window import Window
 from window import MyButton
 from kivy.app import App
 from kivy.uix.textinput import TextInput
-from  kivy.uix.filechooser import FileChooserListView
 
 
 video = Editing('instructions.yaml')
 
 # video.cut('files/original.mp4', 'files/special2.mp4', 'cuts')]
-
-filepath = ""
-
-
 
 
 class CheckBoxApp(App):
@@ -20,18 +15,18 @@ class CheckBoxApp(App):
         def on_text(instance, value):
             return value
 
-        textinput = TextInput(text="")
-        textinput.bind(text=on_text)
+        text_input = TextInput(text="")
+        text_input.bind(text=on_text)
 
-        textinput2 = TextInput(text="")
-        textinput2.bind(text=on_text)
+        text_input2 = TextInput(text="")
+        text_input2.bind(text=on_text)
 
         button = MyButton()
-        window = Window(video.get_names(), button.get_button(), textinput, textinput2).make_window()
+        window = Window(video.get_names(), button.get_button(), text_input, text_input2).make_window()
 
         def callback(instance):
             choices = window.get_choices()
-            video.assemble('cuts', choices, textinput.text + '/' + textinput2.text + '.mp4')
+            video.assemble('cuts', choices, text_input.text + '/' + text_input2.text + '.mp4')
 
         button.get_button().bind(on_press=callback)
 
