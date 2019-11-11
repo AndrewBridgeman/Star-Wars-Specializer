@@ -9,7 +9,7 @@ class Cutting:
         self._outputs = []
         self._dir = clip_dir
 
-    def add_span(self, time1, time2, name, num):
+    def add_span(self, time1, time2, name, num=None):
         if time1 != 'none' and time2 != 'none':
             self._outputs.append((time1, time2, name, num))
 
@@ -33,5 +33,8 @@ class Cutting:
         command.extend(['-i', self._input])
         command.append('-ss')
         command.append(output[0])
-        command.append(self._dir + '/' + self._fill_template(output[2], output[3]))
+        if len(output)==3:
+            command.append(self._dir + '/' + output[2])
+        else:
+            command.append(self._dir + '/' + self._fill_template(output[2], output[3]))
         return command

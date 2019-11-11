@@ -16,14 +16,15 @@ class Editing:
         self._video_list = data.get_video_list()
         self._names = data.get_names()
 
+    def init_cut(self, file, time, directory, original_name, special_name):
+        cutter = Cutting(file, directory)
+        cutter.add_span('00:00:00.000', time, original_name)
+        cutter.add_span(time, '0', special_name)
+        cutter.write()
+
     def cut(self, original, special, clip_dir):
         cutter_original = Cutting(original, clip_dir)
         cutter_special = Cutting(special, clip_dir)
-
-        # cutter_original.add_span('00:00:00', '00:00:10', 'temp{}.mp4', 1)
-        # cutter_original.add_span('00:00:10', '00:00:24', 'temp{}.mp4', 2)
-        # cutter_original.add_span('00:00:24', '0', 'temp{}.mp4', 3)
-        # cutter_original.write()
 
         for i in self._original_instructions:
             cutter_original.add_span(i[0], i[1], i[2], i[3])
