@@ -1,7 +1,7 @@
 class Scene:
     def __init__(self, start_time, end_time, type_scene):
         if start_time == 'start':
-            self._start_time = '00:00:00'
+            self._start_time = '00:00:00.000'
         else:
             self._start_time = start_time
 

@@ -7,7 +7,7 @@ from kivy.uix.textinput import TextInput
 
 video = Editing('instructions.yaml')
 
-# video.cut('files/original.mp4', 'files/special2.mp4', 'cuts')]
+# video.cut('files/original.mp4', 'files/special2.mp4', 'cuts')
 
 
 class CheckBoxApp(App):

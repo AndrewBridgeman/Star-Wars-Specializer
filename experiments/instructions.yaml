@@ -26,30 +26,30 @@ scene-times:
 #  scenes:
 #    - deleted:
 #      special-start: start
-#      special-end: 00:00:02
+#      special-end: '00:00:02'
 #
 #    - start: start
-#      end: 00:00:04
+#      end: '00:00:04'
 #
 #    - alternate:
 #      start: continue
-#      end: 00:00:06
+#      end: '00:00:06'
 #
-#      special-start: 00:00:06
-#      special-end: 00:00:08
+#      special-start: '00:00:06'
+#      special-end: '00:00:08'
 #
 #    - deleted:
-#      special-start: 00:00:08
-#      special-end: 00:00:10
+#      special-start: '00:00:08'
+#      special-end: '00:00:10'
 #
 #    - start: continue
-#      end: 00:00:08
+#      end: '00:00:08'
 #
 #    - alternate:
 #      start: continue
 #      end: end
 #
-#      special-start: 00:00:12
+#      special-start: '00:00:12'
 #      special-end: end
 
 #special2
@@ -58,11 +58,11 @@ scene-times:
         - name: alternate cantina scene
         - from: original
           start: start
-          end: 00:00:02
+          end: '00:00:02.000'
 
         - from: special
           start: start
-          end: 00:00:02
+          end: '00:00:02.000'
 
     - alternatives:
         - name: deleted jabba scene
@@ -71,21 +71,21 @@ scene-times:
           end: none
 
         - from: special
-          start: 00:00:02
-          end: 00:00:04
+          start: '00:00:02.000'
+          end: '00:00:04.000'
 
     - start: continue
-      end: 00:00:06
+      end: '00:00:06.000'
 
     - alternatives:
         - name: alternate solo scene
         - from: original
           start: continue
-          end: 00:00:08
+          end: '00:00:08.000'
 
         - from: special
-          start: 00:00:08
-          end: 00:00:10
+          start: '00:00:08.000'
+          end: '00:00:10.000'
 
     - start: continue
       end: end
@@ -97,5 +97,5 @@ scene-times:
           end: none
 
         - from: special
-          start: 00:00:12
+          start: '00:00:12.000'
           end: end

@@ -18,7 +18,7 @@ class FileReader:
         # cutter_original.add_span('00:00:24', '0', 'temp{}.mp4', 3)
         # cutter_original.write()
 
-        previous_time = '00:00:00'
+        previous_time = '00:00:00.000'
 
         for i in range(len(self._text['scene-times']['scenes'])):
 
