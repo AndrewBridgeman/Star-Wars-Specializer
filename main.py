@@ -8,6 +8,7 @@ steps = [0, 0, 1]
 
 video = Editing('instructions.yaml')
 
+# File initialization
 if steps[0] == 1:
     main_file = 'files/original.mp4'
     timestamp = '00:00:05.000'
@@ -16,13 +17,14 @@ if steps[0] == 1:
     special_name = '2.mp4'
     video.init_cut(main_file, timestamp, output_directory, original_name, special_name)
 
+# File cutting
 if steps[1] == 1:
     original_name = 'files/original.mp4'
     special_name = 'files.special2.mp4'
     output_directory = 'cuts'
     video.cut(original_name, special_name, output_directory)
 
-
+# File assembly
 if steps[2] == 1:
     class CheckBoxApp(App):
         def build(self):
