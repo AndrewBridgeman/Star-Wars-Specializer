@@ -15,9 +15,9 @@ class FileReader:
 
         previous_time = '00:00:00.000'
 
-        for i in range(len(self._text['scene-times']['scenes'])):
+        for i in range(len(self._text['scenes'])):
 
-            current = self._text['scene-times']['scenes'][i]
+            current = self._text['scenes'][i]
 
             if 'alternatives' in (current.keys()):
                 current = current['alternatives']

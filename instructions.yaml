@@ -1,29 +1,36 @@
 ##YAML document to outline deleted/alternate scenes and their timestamps
-scene-times:
-  ##list of scenes that will be cut
 
   #EXAMPLE 1: single scene
     # - start: *start timestamp*
     #   end: *end timestamp*
+
   #EXAMPLE 2: deleted scene
-    # - deleted:
-    #   special-start: *start timestamp in special video*
-    #   special-end: *end timestamp in special video*
-  #EXAMPLE 3: alternate scene
-    # - alternate:
-    #   start: *start timestamp in original video*
-    #   end: *end timestamp in original video*
+    # - alternatives:
+    #   - name: *name of deleted scene*
+    #   - from: original
+    #     start: none
+    #     end: none
     #
-    #   special-start: *start timestamp in special video*
-    #   special-end: *end timestamp in special video*
+    #   - from: special
+    #     start: *start timestamp in director's cut edition*
+    #     end: *end timestamp in director's cut edition*
 
-  #timestamps are written as hh:mm:ss
+  #EXAMPLE 3: alternate scene
+    # - alternatives:
+    #   - name: *name of alternate scene*
+    #   - from: original
+    #     start: *start timestamp in theatrical edition*
+    #     end: *end timestamp in theatrical edition*
+    #
+    #   - from: special
+    #     start: *start timestamp in director's cut edition*
+    #     end: *end timestamp in director's cut edition*
 
-  #if a scene continues from an earlier cut, continue
-  #can be written instead of the prior timestamp
+  #timestamps are written as hh:mm:ss.XXX
 
-#special2
-  scenes:
+  #if a scene continues from an earlier cut, continue can be written instead of the prior timestamp
+
+scenes:
     - alternatives:
         - name: alternate cantina scene
         - from: original
