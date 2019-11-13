@@ -49,3 +49,13 @@ cut version of the movie. More detailed instructions are provided in 'instructio
 
 Run 'main.py.'
 
+# Assembling files
+In 'main.py,' change 'steps' to [0, 0, 1]. 
+
+Run 'main.py.' 
+
+You will be presented with a window detailing the scenes you specified in 'instructions.yaml.'
+Select the scenes you would like to include with the checkboxes. After, enter the file directory you
+wish to export to and the name you would like to call the file (no '.mp4' necessary). Click 'Assemble'
+and you will be provided with an MP4 file of your very own custom movie!
+
