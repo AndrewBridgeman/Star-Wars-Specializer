@@ -8,7 +8,6 @@ from kivy.uix.gridlayout import GridLayout
 
 from kivy.core.window import Window
 
-Window.clearcolor = (1, 1, 1, 1)
 
 
 class LabeledChoice:
@@ -31,26 +30,25 @@ class LabeledChoice:
 
 
 class MyButton:
-    def __init__(self):
-        self._button = Button(text='Assemble', font_size=30)
+    def __init__(self, text):
+        self._button = Button(text=text, font_size=30)
 
     def get_button(self):
         return self._button
 
 
 class BunchOfChoices(GridLayout):
-    def __init__(self, labels, button, text, text2, **kwargs):
+    def __init__(self, labels, button, button2, text, **kwargs):
         super(BunchOfChoices, self).__init__(**kwargs)
         self.cols = 2
         self._choices = []
         for label in labels:
             widget = LabeledChoice(label, self)
             self._choices.append(widget)
-        self.add_widget(Label(text="Enter file directory you wish to export to:", color = [0,0,0,1]))
-        self.add_widget(text)
         self.add_widget(Label(text="Enter name you wish to call video:", color = [0,0,0,1]))
-        self.add_widget(text2)
+        self.add_widget(text)
         self.add_widget(button)
+        self.add_widget(button2)
 
     def add_button(self, button):
         self.add_widget(button)
@@ -62,13 +60,13 @@ class BunchOfChoices(GridLayout):
         return results
 
 
-class Window:
-    def __init__(self, cuts, button, text, text2):
+class MyWindow:
+    def __init__(self, cuts, button, button2, text):
         self._cuts = cuts
         self._button = button
+        self._button2 = button2
         self._text = text
-        self._text2 = text2
 
     def make_window(self):
-        window = BunchOfChoices(self._cuts, self._button, self._text, self._text2)
+        window = BunchOfChoices(self._cuts, self._button, self._button2, self._text)
         return window

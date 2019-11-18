@@ -21,3 +21,4 @@ cython = "~= 0.29.13"
 kivy = "~=1.11"
 ffpyplayer = "~=4.2.0"
 pyyaml = "*"
+f2bf43e = {file = "https://github.com/kivy-garden/filebrowser/archive/master.zip"}

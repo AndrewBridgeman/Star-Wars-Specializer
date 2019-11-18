@@ -1,8 +1,12 @@
 from editing import Editing
-from window import Window
+from window import MyWindow
 from window import MyButton
 from kivy.app import App
 from kivy.uix.textinput import TextInput
+from os.path import sep, expanduser, isdir, dirname
+from kivy_garden.filebrowser import FileBrowser
+from kivy.utils import platform
+from kivy.core.window import Window
 
 steps = [0, 0, 1]
 
@@ -26,28 +30,61 @@ if steps[1] == 1:
 
 # File assembly
 if steps[2] == 1:
-    class CheckBoxApp(App):
+    class Choose_FolderApp(App):
+
         def build(self):
+            Window.clearcolor = (0, 0, 0, 0)
+            if platform == 'win':
+                user_path = dirname(expanduser('~')) + sep + 'Documents'
+            else:
+                user_path = expanduser('~') + sep + 'Documents'
+            browser = FileBrowser(dirselect=True, select_string='Choose Folder', cancel_string='',
+                                  favorites=[(user_path, 'Documents')])
+            browser.bind(
+                        on_success=self._fbrowser_success,
+                        on_canceled=self._fbrowser_canceled)
+            return browser
+
+        def _fbrowser_canceled(self, instance):
+            print('')
+
+        def _fbrowser_success(self, instance):
+            file = open("temp2.txt", "w")
+            file.write(str(instance.selection))
+            file.close()
+            App.get_running_app().stop()
+            AssembleApp().run()
+
+
+    class AssembleApp(App):
+        def build(self):
+            Window.clearcolor = (1, 1, 1, 1)
             def on_text(instance, value):
                 return value
 
             text_input = TextInput(text="")
             text_input.bind(text=on_text)
 
-            text_input2 = TextInput(text="")
-            text_input2.bind(text=on_text)
+            button = MyButton("Assemble")
+            button2 = MyButton("Go back")
+            window = MyWindow(video.get_names(), button.get_button(), button2.get_button(), text_input).make_window()
 
-            button = MyButton()
-            window = Window(video.get_names(), button.get_button(), text_input, text_input2).make_window()
 
             def callback(instance):
                 choices = window.get_choices()
-                video.assemble('cuts', choices, text_input.text + '/' + text_input2.text + '.mp4')
+                file = open("temp2.txt", "r+")
+                path = file.read()
+                path = path[2:-2]
+                video.assemble('cuts', choices, path + '/' + text_input.text + '.mp4')
+                App.get_running_app().stop()
+
+            def callback2(instance):
+                App.get_running_app().stop()
+                Choose_FolderApp().run()
 
             button.get_button().bind(on_press=callback)
+            button2.get_button().bind(on_press=callback2)
 
             return window
 
-
-    if __name__ == '__main__':
-        CheckBoxApp().run()
+    Choose_FolderApp().run()
