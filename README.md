@@ -54,8 +54,12 @@ In 'main.py,' change 'steps' to [0, 0, 1].
 
 Run 'main.py.' 
 
-You will be presented with a window detailing the scenes you specified in 'instructions.yaml.'
-Select the scenes you would like to include with the checkboxes. After, enter the file directory you
-wish to export to and the name you would like to call the file (no '.mp4' necessary). Click 'Assemble'
+First, you will be presented with a window asking you to select the folder you would like to save your
+video to. You can go within folders by double clicking. Once you have found the desired folder,
+click it once and select "Choose Folder."
+
+You will next be presented with a window detailing the scenes you specified in 'instructions.yaml.'
+Select the scenes you would like to include with the checkboxes. After, enter the name you would like to 
+call the file (no '.mp4' necessary). Click 'Assemble'
 and you will be provided with an MP4 file of your very own custom movie!
 
