@@ -4,7 +4,9 @@ from assembly_class import Assembly
 from file_reader import FileReader
 
 import yaml
-
+import sys
+import subprocess
+import re
 
 class Editing:
     def __init__(self, filename):
@@ -22,7 +24,7 @@ class Editing:
         cutter.add_span(time, '0', special_name)
         cutter.write()
 
-    def cut(self, original, special, clip_dir):
+    def cut(self, original, special, clip_dir, res):
         cutter_original = Cutting(original, clip_dir)
         cutter_special = Cutting(special, clip_dir)
 
@@ -32,8 +34,28 @@ class Editing:
         for i in self._special_instructions:
             cutter_special.add_span(i[0], i[1], i[2], i[3])
 
-        cutter_original.write()
-        cutter_special.write()
+        cutter_original.write(res)
+        cutter_special.write(res)
+
+    def get_res(self, original):
+        command = self.build_command(original)
+        completed = subprocess.run(command, capture_output=True)
+        if completed.returncode != 0:
+            sys.stderr.write('Error from ffmpeg:\n')
+            sys.stderr.write(completed.stderr.decode())
+            sys.stderr.write('\n')
+            sys.exit(2)
+        res = subprocess.check_output(command)
+        res = str(res)
+        temp = re.findall(r'\d+', res)
+        res = list(map(int, temp))
+        return res
+
+    def build_command(self, original):
+        command = ['ffprobe', '-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=width,height']
+        command.extend(['-of', 'csv=s=x:p=0'])
+        command.append(original)
+        return command
 
     def assemble(self, clip_dir, choices, output):
         movie = Assembly(output)

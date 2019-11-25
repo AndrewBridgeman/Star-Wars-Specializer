@@ -19,7 +19,7 @@ class Assembly:
 
     def write(self):
         # Change this line to try different methods
-        command = self._concat_demuxer()
+        command = self._concat_protocol()
         completed = subprocess.run(command, capture_output=True)
         if completed.returncode != 0:
             sys.stderr.write('Error from ffmpeg:\n')
@@ -49,20 +49,13 @@ class Assembly:
         return command
 
     def _concat_protocol(self):
-        for i in range(len(self._inputs)):
-            command = ['ffmpeg', '-y']
-            command.extend(['-i', self._inputs[i]])
-            command.extend(['-c', 'copy', '-bsf:v', 'h264_mp4toannexb', '-f', 'mpegts'])
-            command.append('intermediate' + str(i+1) + '.ts')
-            subprocess.run(command, capture_output=True)
-
         command = ['ffmpeg', '-y', '-i']
         concat_list = 'concat:'
         for i in range(len(self._inputs)):
             if i == len(self._inputs)-1:
-                concat_list = concat_list + 'intermediate' + str(i + 1) + '.ts'
+                concat_list = concat_list + self._inputs[i]
             else:
-                concat_list = concat_list + 'intermediate' + str(i+1) + '.ts|'
+                concat_list = concat_list + self._inputs[i] + '|'
         command.append(concat_list)
         command.extend(['-c', 'copy', '-bsf:a', 'aac_adtstoasc'])
         command.append(self._output)

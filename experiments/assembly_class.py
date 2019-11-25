@@ -49,13 +49,6 @@ class Assembly:
         return command
 
     def _concat_protocol(self):
-        for i in range(len(self._inputs)):
-            command = ['ffmpeg', '-y']
-            command.extend(['-i', self._inputs[i]])
-            command.extend(['-c', 'copy', '-bsf:v', 'h264_mp4toannexb', '-f', 'mpegts'])
-            command.append('intermediate' + str(i+1) + '.ts')
-            subprocess.run(command, capture_output=True)
-
         command = ['ffmpeg', '-y', '-i']
         concat_list = 'concat:'
         for i in range(len(self._inputs)):

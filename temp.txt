@@ -1,7 +1,0 @@
-file 'cuts/x1single.mp4'
-file 'cuts/x2original.mp4'
-file 'cuts/x4single.mp4'
-file 'cuts/x6special.mp4'
-file 'cuts/x7single.mp4'
-file 'cuts/x9single.mp4'
-file 'cuts/x11single.mp4'

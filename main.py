@@ -10,28 +10,22 @@ from kivy.core.window import Window
 from kivy.uix.popup import Popup
 from kivy.uix.label import Label
 
-steps = [0, 0, 1]
+step = 2
 
 video = Editing('instructions.yaml')
 
-# File initialization
-if steps[0] == 1:
-    main_file = 'A New Hope.mp4'
-    timestamp = '02:01:46.000'
-    output_directory = 'versions'
-    original_name = 'original.mp4'
-    special_name = 'special.mp4'
-    video.init_cut(main_file, timestamp, output_directory, original_name, special_name)
-
 # File cutting
-if steps[1] == 1:
-    original_name = 'versions/original.mp4'
-    special_name = 'versions/special.mp4'
+if step == 1:
+    # change these two lines
+    original_path = 'versions/original.mp4'
+    special_path = 'versions/special.mp4'
+    ########################
     output_directory = 'cuts'
-    video.cut(original_name, special_name, output_directory)
+    res = video.get_res(original_path)
+    video.cut(original_path, special_path, output_directory, res)
 
 # File assembly
-if steps[2] == 1:
+if step == 2:
     class Choose_FolderApp(App):
 
         def build(self):
@@ -57,7 +51,7 @@ if steps[2] == 1:
                               size_hint=(None, None), size=(600, 600))
                 popup.open()
             else:
-                file = open("temp2.txt", "w")
+                file = open("filepath.txt", "w")
                 file.write(str(instance.selection))
                 file.close()
                 App.get_running_app().stop()
@@ -80,7 +74,7 @@ if steps[2] == 1:
 
             def callback(instance):
                 choices = window.get_choices()
-                file = open("temp2.txt", "r+")
+                file = open("filepath.txt", "r+")
                 path = file.read()
                 path = path[2:-2]
                 if not text_input.text:
@@ -99,7 +93,8 @@ if steps[2] == 1:
                     except:
                         popup = Popup(title='Error',
                                       content=Label(text='Error creating video file. \nYou may have selected a file '
-                                                         'instead \nof a folder in the previous window.'),
+                                                         'instead \nof a folder in the previous window. Also make'
+                                                         'sure that your files are in the \'cuts\' folder'),
                                       size_hint=(None, None), size=(700, 700))
                         popup.open()
 

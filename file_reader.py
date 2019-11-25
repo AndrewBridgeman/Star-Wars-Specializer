@@ -25,8 +25,8 @@ class FileReader:
                 new_scene = AlternateScene(current[1]['start'], current[1]['end'], 'alternative', \
                                            current[2]['start'], current[2]['end'])
 
-                file_name_original = 'x{}original.mp4'
-                file_name_special = 'x{}special.mp4'
+                file_name_original = 'x{}original.ts'
+                file_name_special = 'x{}special.ts'
 
                 if new_scene.get_start_time() == 'continue':
                     new_scene.set_start_time(previous_time)
@@ -49,7 +49,7 @@ class FileReader:
             # single scene case
             else:
                 new_scene = SingleScene(current['start'], current['end'], 'single')
-                file_name = 'x{}single.mp4'
+                file_name = 'x{}single.ts'
 
                 if new_scene.get_start_time() == 'continue':
                     new_scene.set_start_time(previous_time)
