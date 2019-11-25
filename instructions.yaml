@@ -31,48 +31,57 @@
   #if a scene continues from an earlier cut, continue can be written instead of the prior timestamp
 
 scenes:
+    - start: '00:00:00'
+      end: '00:00:21.000'
+
     - alternatives:
-        - name: alternate cantina scene
+        - name: Alternate - 'A New Hope' appears in the opening crawl
         - from: original
-          start: start
-          end: '00:00:02.000'
+          start: continue
+          end: '00:02:27.000'
 
         - from: special
-          start: start
-          end: '00:00:02.000'
+          start: '00:00:18.000'
+          end: '00:02:24.000'
+
+    - start: continue
+      end: '00:49:06.000'
 
     - alternatives:
-        - name: deleted jabba scene
+        - name: Alternate - Greedo shoots at Han
+        - from: original
+          start: continue
+          end: '00:50:21.000'
+
+        - from: special
+          start: '00:50:50.000'
+          end: '00:52:04.000'
+
+    - start: continue
+      end: '00:52:03.000'
+
+    - alternatives:
+        - name: Deleted - Jabba the Hutt scene
         - from: original
           start: none
           end: none
 
         - from: special
-          start: '00:00:02.000'
-          end: '00:00:04.000'
+          start: '00:53:32.000'
+          end: '00:55:04.000'
 
     - start: continue
-      end: '00:00:06.000'
+      end: '01:40:49.000'
 
     - alternatives:
-        - name: alternate solo scene
+        - name: Deleted - Luke and Biggs talk before the Death Star attack
         - from: original
-          start: continue
-          end: '00:00:08.000'
+          start: none
+          end: none
 
         - from: special
-          start: '00:00:08.000'
-          end: '00:00:10.000'
+          start: '01:44:37.000'
+          end: '01:45:05.000'
 
     - start: continue
       end: end
-
-    - alternatives:
-        - name: deleted vader scene
-        - from: original
-          start: none
-          end: none
-
-        - from: special
-          start: '00:00:12.000'
-          end: end

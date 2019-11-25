@@ -16,17 +16,17 @@ video = Editing('instructions.yaml')
 
 # File initialization
 if steps[0] == 1:
-    main_file = 'files/original.mp4'
-    timestamp = '00:00:05.000'
-    output_directory = 'files'
-    original_name = '1.mp4'
-    special_name = '2.mp4'
+    main_file = 'A New Hope.mp4'
+    timestamp = '02:01:46.000'
+    output_directory = 'versions'
+    original_name = 'original.mp4'
+    special_name = 'special.mp4'
     video.init_cut(main_file, timestamp, output_directory, original_name, special_name)
 
 # File cutting
 if steps[1] == 1:
-    original_name = 'files/original.mp4'
-    special_name = 'files.special2.mp4'
+    original_name = 'versions/original.mp4'
+    special_name = 'versions/special.mp4'
     output_directory = 'cuts'
     video.cut(original_name, special_name, output_directory)
 
