@@ -93,8 +93,8 @@ if step == 2:
                     except:
                         popup = Popup(title='Error',
                                       content=Label(text='Error creating video file. \nYou may have selected a file '
-                                                         'instead \nof a folder in the previous window. Also make'
-                                                         'sure that your files are in the \'cuts\' folder'),
+                                                         'instead \nof a folder in the previous window. \nAlso make '
+                                                         'sure that your files are in \nthe \'cuts\' folder.'),
                                       size_hint=(None, None), size=(700, 700))
                         popup.open()
 

@@ -1,1 +1,1 @@
-['/Users/andrewbridgeman/Documents/College/Junior/Custom-Movie-Maker/output']
+['/Users/andrewbridgeman/Documents/Adobe/Adobe Media Encoder/14.0/AMEPrefs.xml']
