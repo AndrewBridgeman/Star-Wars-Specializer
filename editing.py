@@ -8,6 +8,7 @@ import sys
 import subprocess
 import re
 
+
 class Editing:
     def __init__(self, filename):
         self._text = yaml.safe_load(open(filename, 'r'))
@@ -33,6 +34,10 @@ class Editing:
 
         for i in self._special_instructions:
             cutter_special.add_span(i[0], i[1], i[2], i[3])
+
+        # cutter_original.add_span('00:15:29.732', '00:42:19.161', 'hi{}.ts', 1)
+        # cutter_original.add_span('00:42:19.161', '00:43:59.740', 'hi{}.ts', 2)
+        # cutter_special.add_span('00:42:40.800', '00:44:51.980', 'hi{}.ts', 3)
 
         cutter_original.write(res)
         cutter_special.write(res)
@@ -77,7 +82,7 @@ class Editing:
 
                 instructions_count = instructions_count + 1
 
-        print(movie.give_inputs())
+        # print(movie.give_inputs())
 
         movie.write()
 
