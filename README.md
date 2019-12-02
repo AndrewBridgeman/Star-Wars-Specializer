@@ -23,6 +23,8 @@ their viewing pleasure.
     ```
 
 # Cutting files
+*Please note that MP4 files are recommended for best results*.
+
 In **instructions.yaml**, specify the names and times of deleted/alternate scenes in the director's
 cut version of the movie. Here is a template for formatting these times:
 
