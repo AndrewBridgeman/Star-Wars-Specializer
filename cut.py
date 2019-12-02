@@ -19,7 +19,7 @@ class Choose_Original(App):
             user_path = dirname(expanduser('~')) + sep + 'Documents'
         else:
             user_path = expanduser('~') + sep + 'Documents'
-        browser = FileBrowser(dirselect=True, select_string='Choose Folder', cancel_string='Help',
+        browser = FileBrowser(dirselect=True, select_string='Choose File', cancel_string='Help',
                               favorites=[(user_path, 'Documents')])
         browser.bind(
             on_success=self._fbrowser_success,
@@ -55,7 +55,7 @@ class Choose_Special(App):
             user_path = dirname(expanduser('~')) + sep + 'Documents'
         else:
             user_path = expanduser('~') + sep + 'Documents'
-        browser = FileBrowser(dirselect=True, select_string='Choose Folder', cancel_string='Help',
+        browser = FileBrowser(dirselect=True, select_string='Choose File', cancel_string='Help',
                               favorites=[(user_path, 'Documents')])
         browser.bind(
             on_success=self._fbrowser_success,

@@ -23,13 +23,44 @@ their viewing pleasure.
     ```
 
 # Cutting files
-In 'main.py,' change 'step' to 1. 
-
-Change 'original_path' and 'special_path' to the respective paths to the theatrical and director's cut
-video files.
-
 In 'instructions.yaml,' specify the names and times of deleted/alternate scenes in the director's
-cut version of the movie. More detailed instructions are provided in 'instructions.yaml.'
+cut version of the movie. Here is a template for formatting these times:
+  **EXAMPLE 1: single scene**
+    # - start: *start timestamp*
+    #   end: *end timestamp*
+
+  **EXAMPLE 2: deleted scene**
+    # - alternatives:
+    #   - name: *name of deleted scene*
+    #   - from: original
+    #     start: none
+    #     end: none
+    #
+    #   - from: special
+    #     start: *start timestamp in director's cut edition*
+    #     end: *end timestamp in director's cut edition*
+
+  **EXAMPLE 3: alternate scene**
+    # - alternatives:
+    #   - name: *name of alternate scene*
+    #   - from: original
+    #     start: *start timestamp in theatrical edition*
+    #     end: *end timestamp in theatrical edition*
+    #
+    #   - from: special
+    #     start: *start timestamp in director's cut edition*
+    #     end: *end timestamp in director's cut edition*
+
+Timestamps are written as hh:mm:ss.XXX. If a scene continues from an earlier cut, 
+*continue* can be written instead of the prior timestamp
+
+Run **cut.py**
+
+In the first window, find the file containing the theatrical version of the desired movie.
+You can go within folders by double clicking. Once you have found the file, click *Choose File*.
+
+In the second window, find the file containing the director's cut version of the movie 
+Once you have found the file, click *Choose File*.
 
 Run 'main.py.'
 
