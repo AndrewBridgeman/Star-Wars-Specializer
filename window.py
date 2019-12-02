@@ -6,9 +6,6 @@ from kivy.uix.button import Button
 
 from kivy.uix.gridlayout import GridLayout
 
-from kivy.core.window import Window
-
-
 
 class LabeledChoice:
     def __init__(self, label, layout, initial=False):
@@ -45,7 +42,7 @@ class BunchOfChoices(GridLayout):
         for label in labels:
             widget = LabeledChoice(label, self)
             self._choices.append(widget)
-        self.add_widget(Label(text="Enter name you wish to call video:", color = [0,0,0,1]))
+        self.add_widget(Label(text="Enter name you wish to call video:", color=[0, 0, 0, 1]))
         self.add_widget(text)
         self.add_widget(button)
         self.add_widget(button2)
