@@ -57,7 +57,7 @@ cut version of the movie. Here is a template for formatting these times:
 ````
 
 Timestamps are written as hh:mm:ss.XXX. If a scene continues from an earlier cut, 
-*continue* can be written instead of the prior timestamp
+*continue* can be written instead of the prior timestamp.
 
 After completing **instructions.yaml**, run **cut.py**.
 
