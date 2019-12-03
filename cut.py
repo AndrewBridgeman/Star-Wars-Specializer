@@ -36,7 +36,7 @@ class Choose_Original(App):
     def _fbrowser_success(self, instance):
         if not instance.selection or '/' not in str(instance.selection):
             popup = Popup(title='Error',
-                          content=Label(text='Please select a folder to save to.'),
+                          content=Label(text='Please select a file.'),
                           size_hint=(None, None), size=(600, 600))
             popup.open()
         else:
@@ -72,7 +72,7 @@ class Choose_Special(App):
     def _fbrowser_success(self, instance):
         if not instance.selection or '/' not in str(instance.selection):
             popup = Popup(title='Error',
-                          content=Label(text='Please select a folder to save to.'),
+                          content=Label(text='Please select a file.'),
                           size_hint=(None, None), size=(600, 600))
             popup.open()
         else:
