@@ -1,3 +1,0 @@
-([('run',
-   '/Users/andrewbridgeman/Documents/College/Junior/Custom-Movie-Maker/dist/run',
-   'EXECUTABLE')],)
