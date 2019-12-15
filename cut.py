@@ -8,7 +8,9 @@ from kivy.core.window import Window
 from kivy.uix.popup import Popup
 from kivy.uix.label import Label
 
-video = Editing('instructions.yaml')
+cwd = os.getcwd()
+path = os.path.join(cwd, "Downloads/instructions.yaml")
+video = Editing(path)
 
 
 class Choose_Original(App):
@@ -80,15 +82,14 @@ class Choose_Special(App):
             file.write(str(instance.selection))
             file.close()
 
-            if not os.path.isdir('cuts'):
-                os.mkdir('cuts')
             original = open("original.txt", "r+")
             original = original.read()
             original = original[2:-2]
             special = open("special.txt", "r+")
             special = special.read()
             special = special[2:-2]
-            output_directory = 'cuts'
+            cwd = os.getcwd()
+            output_directory = os.path.join(cwd, "Documents/cuts")
             try:
                 res = video.get_res(original)
                 video.cut(original, special, output_directory, res)

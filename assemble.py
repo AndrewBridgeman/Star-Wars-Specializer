@@ -9,8 +9,12 @@ from kivy.utils import platform
 from kivy.core.window import Window
 from kivy.uix.popup import Popup
 from kivy.uix.label import Label
+import yaml
+import os
 
-video = Editing('instructions.yaml')
+cwd = os.getcwd()
+path = os.path.join(cwd, "Downloads/StarWarsSpecializer/instructions.yaml")
+video = Editing(path)
 
 
 class Choose_FolderApp(App):
@@ -41,7 +45,9 @@ class Choose_FolderApp(App):
                           size_hint=(None, None), size=(600, 600))
             popup.open()
         else:
-            file = open("filepath.txt", "w")
+            cwd2 = os.getcwd()
+            path2 = os.path.join(cwd2, "Downloads/StarWarsSpecializer/filepath.txt")
+            file = open(path2, "w")
             file.write(str(instance.selection))
             file.close()
             App.get_running_app().stop()
@@ -64,9 +70,11 @@ class AssembleApp(App):
 
         def callback(instance):
             choices = window.get_choices()
-            file = open("filepath.txt", "r+")
-            path = file.read()
-            path = path[2:-2]
+            cwd3 = os.getcwd()
+            path3 = os.path.join(cwd3, "Downloads/StarWarsSpecializer/filepath.txt")
+            file = open(path3, "r+")
+            path4 = file.read()
+            path4 = path4[2:-2]
             if not text_input.text:
                 popup = Popup(title='Error',
                               content=Label(text='Please enter a name for your video.'),
@@ -79,12 +87,15 @@ class AssembleApp(App):
                 popup.open()
             else:
                 try:
-                    video.assemble('cuts', choices, path + '/' + text_input.text + '.mp4')
+                    cwd2 = os.getcwd()
+                    path2 = os.path.join(cwd2, "Downloads/StarWarsSpecializer/cuts")
+                    video.assemble(path2, choices, path4 + '/' + text_input.text + '.mp4')
                 except:
                     popup = Popup(title='Error',
                                   content=Label(text='Error creating video file. \nYou may have selected a file '
-                                                     'instead \nof a folder in the previous window. \nAlso make '
-                                                     'sure that your files are in \nthe \'cuts\' folder.'),
+                                                     'instead \nof a folder in the previous window. \nIf this is '
+                                                     'not the case, please\ncheck the README to ensure you\nfollowed all '
+                                                     'the instructions.'),
                                   size_hint=(None, None), size=(700, 700))
                     popup.open()
 
