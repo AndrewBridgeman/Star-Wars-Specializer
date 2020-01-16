@@ -16,7 +16,6 @@ python_version = "3.7"
 pytest = "~= 4.3"
 cython = "~= 0.29.13"
 py2app = "*"
-PyInstaller = ">=3.6"
 
 [packages]
 cython = "~= 0.29.13"
